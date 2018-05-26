@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Test</title>
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="css/calendar/fullcalendar.css" />
+<link rel="stylesheet" type="text/css" href="css/calendar/fullcalendar.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/calendar/fullcalendar.min.js"></script>
+<script type="text/javascript">
+</script>
+<style>
+div#all{
+position:absolute;
+width:100%;
+height:100%;
+}
+div#a1, div#a2{
+display:inline-block;
+width:49%;
+height:50%;
+}
+div#a3{
+float:right;
+display:inline-block;
+width:50%;
+height:100%;
+}
+div#a1{
+background-color: red;
+}
+div#a2{
+background-color: blue;
+}
+div#a3{
+background-color: green;
+background:green;
+border-style: solid;
+border-color: blue;
+border-width: 1px;
+}
+
+/* .custom-select{
+display:inline-block;
+width:15%;
+}
+.col-form-label{
+display:inline-block;
+width:20%;
+} */
+
+.form-group>*{
+display:inline-block;
+width:18%;
+}
+
+</style>
+</head>
+<body>
+  <div class="form-group">
+    <select class="custom-select">
+      <option selected="">Start time</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+      <option value="11">11</option>
+      <option value="12">12</option>
+      <option value="13">13</option>
+      <option value="14">14</option>
+      <option value="15">15</option>
+      <option value="16">16</option>
+      <option value="17">17</option>
+    </select>
+    <select class="custom-select">
+      <option selected="">End time</option>
+      <option value="10">10</option>
+      <option value="11">11</option>
+      <option value="12">12</option>
+      <option value="13">13</option>
+      <option value="14">14</option>
+      <option value="15">15</option>
+      <option value="16">16</option>
+      <option value="17">17</option>
+      <option value="18">18</option>
+    </select>
+    <select class="custom-select">
+      <option selected="">Capacity</option>
+      <option value="1">4</option>
+      <option value="2">6</option>
+      <option value="3">10</option>
+      <option value="3">14</option>
+      <option value="3">more</option>
+      
+      
+    </select>
+  	<input type="text" class="form-control" placeholder="Room number" id="inputDefault">
+  	<button type="button" class="btn btn-outline-primary">Search</button>
+  </div>
+</body>
+</html>
