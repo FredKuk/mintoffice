@@ -8,11 +8,12 @@ import vo.Memo;
 
 public class MemoService {
 	private MemoDAO dao = new MemoDAOOracle();
-	public int findCount() throws Exception{
-		return dao.selectCount();
+	
+	public int findCount(String emp_no) throws Exception{
+		return dao.selectCount(emp_no);
 	}
-	public List<Memo> findAll(int page) throws Exception{
-		return dao.selectAll(page);
+	public List<Memo> findAll(String emp_no, int page) throws Exception{
+		return dao.selectAll(emp_no, page);
 	}
 	public void insert(Memo m) throws Exception{
 		dao.insert(m);

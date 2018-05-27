@@ -13,15 +13,16 @@ import vo.Memo;
 public class MemoDAOOracle implements MemoDAO {
 
 	@Override
-	public int selectCount() throws Exception {
+	public int selectCount(String emp_no) throws Exception {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String selectCountSQL = 
-				"SELECT COUNT(*) totalcnt FROM MEMO";
+				"SELECT COUNT(*) totalcnt FROM MEMO WHERE emp_no=?";
 		try {
 			con = sql.MyConnection.getConnection();
-			pstmt = con.prepareStatement(selectCountSQL);
+			pstmt = con.prepareStatement(selectCountSQL);	
+			pstmt.setString(1,emp_no);
 			rs = pstmt.executeQuery();
 			rs.next();
 			int totalCount = rs.getInt("totalcnt");
@@ -32,16 +33,18 @@ public class MemoDAOOracle implements MemoDAO {
 	}
 
 	@Override
-	public List<Memo> selectAll(int page) throws Exception {
+	public List<Memo> selectAll(String emp_no,int page) throws Exception {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		String selectAllSQL="SELECT  b.*\r\n" + 
 							"FROM (SELECT ROWNUM r, a.*\r\n" + 
-							"      FROM (SELECT to_number(m.memo_no,'9999') no, m.emp_no, m.memo_date, m.memo_contents\r\n" + 
-							"            FROM MEMO m\r\n" + 
-							"            order by no desc)  a) b\r\n" + 
+							"        FROM (SELECT to_number(m.memo_no,'9999') no, m.emp_no, m.memo_date, m.memo_contents\r\n" + 
+							"               FROM MEMO m\r\n" + 
+							"               WHERE  m.emp_no=?\r\n" + 
+							"               ORDER BY no desc) a\r\n" + 
+							"               ) b\r\n" + 
 							"WHERE r BETWEEN  ? AND ?";
 		List<Memo> list = new ArrayList<>();
 		try {
@@ -49,9 +52,10 @@ public class MemoDAOOracle implements MemoDAO {
 			pstmt = con.prepareStatement(selectAllSQL);
 			int cntPerPage=5;//1페이지별 3건씩 보여준다
 			int endRow=cntPerPage * page;
-			int startRow=endRow-cntPerPage+1; 			
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
+			int startRow=endRow-cntPerPage+1;
+			pstmt.setString(1, emp_no);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			rs = pstmt.executeQuery();		
 			while(rs.next()) {
 				list.add(new Memo(

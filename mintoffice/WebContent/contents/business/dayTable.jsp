@@ -1,5 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<script>
+$(function(){
+	$('#cdtForm').submit(function(){
+		$.ajax({
+			method:'POST',
+			url: 'showcdt.do',
+			data:$('#cdtForm').serialize(),
+			success: function(data){
+				$('#dtBody').empty();
+				$('#dtBody').append(data);
+				console.log('success');
+			}
+		});
+		return false;
+	});
+});
+</script>
+
 <style>
 .workTableAllDiv{
 	max-width: 92%;
@@ -31,14 +50,16 @@
 }
 
 .workTimeTable td,th {
-	width: 12%;
+	width: 9%;
 }
 .workTableSearch{
 width:70%;
 }
-
-.workTableSearch>* {
-	width: 22%;
+.workTableSearch>form{
+width:100%;
+}
+.workTableSearch>form * {
+	width: 17%;
 	height: 30px;
 	margin-bottom: 2px;
 	text-align: center;
@@ -52,7 +73,7 @@ width:70%;
 	display: inline-block;
 }
 
-input[type=date] {
+#cdtForm>input[type=date] {
 	color: grey;
 	font-size: 13px;
 }
@@ -62,10 +83,17 @@ input[type=date] {
 }
 
 .arriveOk{
-	color:deepskyblue;
+	color:#3333FF;
 }
 .arriveBad{
 	color:orangered;
+}
+
+.dtYes{
+	color:#FF6666;
+}
+.dtNo{
+	color:#0080FF;
 }
 </style>
 <div class="workTableAllDiv">
@@ -74,9 +102,10 @@ input[type=date] {
 	</div>
 	<div class="workTableHeader">
 		<div class="workTableSearch">
-			<input type="date">&emsp;~&emsp; <input type="date"
-				style="margin-left: 0px;">
-			<button type="button" class="btn btn-outline-primary btn-sm">Search</button>
+			<form id='cdtForm'>
+				<input type="date" name='ldDate' required>&emsp;~&emsp; <input type="date" name='rdDate'style="margin-left: 0px;" required>
+				<input type="submit" class="btn btn-outline-primary btn-sm" value="Submit">
+			</form>
 		</div>
 		<div class="workTablePagination">
 			<ul class="pagination">
@@ -101,214 +130,14 @@ input[type=date] {
 					<th>정상출근</th>
 					<th>출근시간</th>
 					<th>퇴근시간</th>
-					<th>초과시간</th>
+					<th>야근시간</th>
 					<th>외근시간</th>
 					<th>복귀시간</th>
-					<th>조퇴시간</th>
+					<th>병가여부</th>
+					<th>조퇴여부</th>
 				</tr>
 			</thead>
-			<tbody>
-				<tr class="workTimeContents">
-					<td>2018-05-15</td>
-					<td class="arriveOk"><i class="far fa-circle"></i></td>
-					<td>08:55:42</td>
-					<td>18:08:22</td>
-					<td>02:11:22</td>
-					<td>11:02:11</td>
-					<td>16:52:22</td>
-					<td>-</td>
-				</tr>
-				<tr class="workTimeContents">
-					<td>2018-05-15</td>
-					<td class="arriveBad"><i class="fas fa-times"></i></td>
-					<td>08:55:42</td>
-					<td>18:08:22</td>
-					<td>02:11:22</td>
-					<td>11:02:11</td>
-					<td>16:52:22</td>
-					<td>18:08:22</td>
-				</tr>
-				<tr class="workTimeContents">
-					<td>2018-05-15</td>
-					<td class="arriveOk"><i class="far fa-circle"></i></td>
-					<td>08:55:42</td>
-					<td>18:08:22</td>
-					<td>-</td>
-					<td>11:02:11</td>
-					<td>16:52:22</td>
-					<td>-</td>
-				</tr>
-				<tr class="workTimeContents">
-					<td>2018-05-15</td>
-					<td class="arriveOk"><i class="far fa-circle"></i></td>
-					<td>08:55:42</td>
-					<td>18:08:22</td>
-					<td>-</td>
-					<td>11:02:11</td>
-					<td>16:52:22</td>
-					<td>-</td>
-				</tr>
-				<tr class="workTimeContents">
-					<td>2018-05-15</td>
-					<td class="arriveOk"><i class="far fa-circle"></i></td>
-					<td>08:55:42</td>
-					<td>18:08:22</td>
-					<td>-</td>
-					<td>11:02:11</td>
-					<td>16:52:22</td>
-					<td>-</td>
-				</tr>
-				<tr class="workTimeContents">
-					<td>2018-05-15</td>
-					<td class="arriveOk"><i class="far fa-circle"></i></td>
-					<td>08:55:42</td>
-					<td>18:08:22</td>
-					<td>-</td>
-					<td>11:02:11</td>
-					<td>16:52:22</td>
-					<td>-</td>
-				</tr>
-				<tr class="workTimeContents">
-					<td>2018-05-15</td>
-					<td class="arriveOk"><i class="far fa-circle"></i></td>
-					<td>08:55:42</td>
-					<td>18:08:22</td>
-					<td>-</td>
-					<td>11:02:11</td>
-					<td>16:52:22</td>
-					<td>-</td>
-				</tr>
-				<tr class="workTimeContents">
-					<td>2018-05-15</td>
-					<td class="arriveOk"><i class="far fa-circle"></i></td>
-					<td>08:55:42</td>
-					<td>18:08:22</td>
-					<td>-</td>
-					<td>11:02:11</td>
-					<td>16:52:22</td>
-					<td>-</td>
-				</tr>
-				<tr class="workTimeContents">
-					<td>2018-05-15</td>
-					<td class="arriveOk"><i class="far fa-circle"></i></td>
-					<td>08:55:42</td>
-					<td>18:08:22</td>
-					<td>-</td>
-					<td>11:02:11</td>
-					<td>16:52:22</td>
-					<td>-</td>
-				</tr>
-				<tr class="workTimeContents">
-					<td>2018-05-15</td>
-					<td class="arriveOk"><i class="far fa-circle"></i></td>
-					<td>08:55:42</td>
-					<td>18:08:22</td>
-					<td>-</td>
-					<td>11:02:11</td>
-					<td>16:52:22</td>
-					<td>-</td>
-				</tr>
-				<tr class="workTimeContents">
-					<td>2018-05-15</td>
-					<td class="arriveOk"><i class="far fa-circle"></i></td>
-					<td>08:55:42</td>
-					<td>18:08:22</td>
-					<td>-</td>
-					<td>11:02:11</td>
-					<td>16:52:22</td>
-					<td>-</td>
-				</tr>
-				<tr class="workTimeContents">
-					<td>2018-05-15</td>
-					<td class="arriveOk"><i class="far fa-circle"></i></td>
-					<td>08:55:42</td>
-					<td>18:08:22</td>
-					<td>-</td>
-					<td>11:02:11</td>
-					<td>16:52:22</td>
-					<td>-</td>
-				</tr>
-				<tr class="workTimeContents">
-					<td>2018-05-15</td>
-					<td class="arriveOk"><i class="far fa-circle"></i></td>
-					<td>08:55:42</td>
-					<td>18:08:22</td>
-					<td>-</td>
-					<td>11:02:11</td>
-					<td>16:52:22</td>
-					<td>-</td>
-				</tr>
-				<tr class="workTimeContents">
-					<td>2018-05-15</td>
-					<td class="arriveOk"><i class="far fa-circle"></i></td>
-					<td>08:55:42</td>
-					<td>18:08:22</td>
-					<td>-</td>
-					<td>11:02:11</td>
-					<td>16:52:22</td>
-					<td>-</td>
-				</tr>
-				<tr class="workTimeContents">
-					<td>2018-05-15</td>
-					<td class="arriveOk"><i class="far fa-circle"></i></td>
-					<td>08:55:42</td>
-					<td>18:08:22</td>
-					<td>01:11:22</td>
-					<td>11:02:11</td>
-					<td>16:52:22</td>
-					<td>-</td>
-				</tr>
-				<tr class="workTimeContents">
-					<td>2018-05-15</td>
-					<td class="arriveBad"><i class="fas fa-times"></i></td>
-					<td>08:55:42</td>
-					<td>18:08:22</td>
-					<td></td>
-					<td>11:02:11</td>
-					<td>16:52:22</td>
-					<td>18:08:22</td>
-				</tr>
-				<tr class="workTimeContents">
-					<td>2018-05-15</td>
-					<td class="arriveOk"><i class="far fa-circle"></i></td>
-					<td>08:55:42</td>
-					<td>18:08:22</td>
-					<td>00:11:22</td>
-					<td>11:02:11</td>
-					<td>16:52:22</td>
-					<td>-</td>
-				</tr>
-				<tr class="workTimeContents">
-					<td>2018-05-15</td>
-					<td class="arriveBad"><i class="fas fa-times"></i></td>
-					<td>08:55:42</td>
-					<td>18:08:22</td>
-					<td></td>
-					<td>11:02:11</td>
-					<td>16:52:22</td>
-					<td>-</td>
-				</tr>
-				<tr class="workTimeContents">
-					<td>2018-05-15</td>
-					<td class="arriveOk"><i class="far fa-circle"></i></td>
-					<td>08:55:42</td>
-					<td>18:08:22</td>
-					<td></td>
-					<td>11:02:11</td>
-					<td>16:52:22</td>
-					<td>-</td>
-				</tr>
-				<tr class="workTimeContents">
-					<td>2018-05-15</td>
-					<td class="arriveOk"><i class="far fa-circle"></i></td>
-					<td>08:55:42</td>
-					<td>18:08:22</td>
-					<td>05:00:24</td>
-					<td>11:02:11</td>
-					<td>16:52:22</td>
-					<td>-</td>
-				</tr>
-
+			<tbody id='dtBody'>
 			</tbody>
 		</table>
 	</div>

@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import control.Controller;
 import service.MemoService;
@@ -34,10 +35,12 @@ public class ViewMemoController implements Controller {
 	}
 
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		String emp_no = (String) session.getAttribute("emp_no");
 		int intPage=1;
 		try {
 			//게시물 총목록수
-			int totalCount = service.findCount();
+			int totalCount = service.findCount(emp_no);
 			
 			//총페이지수계산			
 			int totalPage = 0;
@@ -51,7 +54,7 @@ public class ViewMemoController implements Controller {
 			if(endPage > totalPage) {
 				endPage = totalPage;
 			}	
-			List<Memo> list = service.findAll(intPage);
+			List<Memo> list = service.findAll(emp_no, intPage);
 			PageBean<Memo> pb = new PageBean<>();
 			pb.setCurrentPage(intPage);//현재페이지
 			pb.setTotalPage(totalPage); //총페이지

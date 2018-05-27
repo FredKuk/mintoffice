@@ -5,6 +5,7 @@ import java.util.List;
 import dao.CommuteDAO;
 import dao.CommuteDAOOracle;
 import vo.Commute;
+import vo.CommuteDBean;
 import vo.CommuteM;
 
 public class CommuteService {
@@ -44,6 +45,14 @@ public class CommuteService {
 
 	public List<CommuteM> showMonthCommute(String emp_no,String year) throws Exception{
 		return dao.showCommuteM(emp_no,year);
+	}
+
+	public int getDayCCount(String ldDate, String rdDate, String emp_no) throws Exception{
+		return dao.getDayCCount(ldDate,rdDate,emp_no);
+	}
+
+	public List<CommuteDBean> findAll(String ldDate, String rdDate, String emp_no, int intPage) throws Exception{
+		return dao.findAll(ldDate,rdDate,emp_no,intPage);
 	}
 
 }

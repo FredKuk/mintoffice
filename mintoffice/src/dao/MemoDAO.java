@@ -6,9 +6,9 @@ import vo.Memo;
 
 public interface MemoDAO {
 
-	int selectCount() throws Exception;
+	int selectCount(String emp_no) throws Exception;
 
-	List<Memo> selectAll(int page) throws Exception;
+	List<Memo> selectAll(String emp_no, int page) throws Exception;
 
 	void insert(Memo board) throws Exception;
 
