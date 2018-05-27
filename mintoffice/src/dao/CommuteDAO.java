@@ -3,6 +3,7 @@ package dao;
 import java.util.List;
 
 import vo.Commute;
+import vo.CommuteM;
 
 public interface CommuteDAO {
 
@@ -21,5 +22,7 @@ public interface CommuteDAO {
 	void illness(String com_no) throws Exception ;
 
 	List<Commute> showCommute(String emp_no) throws Exception;
+
+	List<CommuteM> showCommuteM(String emp_no,String year) throws Exception;
 
 }

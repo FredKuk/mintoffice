@@ -11,6 +11,7 @@ import java.util.List;
 
 import sql.MyConnection;
 import vo.Commute;
+import vo.CommuteM;
 
 public class CommuteDAOOracle implements CommuteDAO {
 
@@ -259,34 +260,81 @@ public class CommuteDAOOracle implements CommuteDAO {
 		}
 		return list;
 	}
-	/*@Override
-	public List<Commute> showCommute(String emp_no) throws Exception {
-		List<Commute> list = new ArrayList<>();
+	
+	@Override
+	public List<CommuteM> showCommuteM(String emp_no,String year) throws Exception {
+		List<CommuteM> list = new ArrayList<>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+
+		int month=0;
+		int workDay=0;
+		int goodDay=0;
+		int lateDay=0;
+		int earlyDay=0;
+		int sickDay=0;
+		int overWork=0;
+		
+		CommuteM cm=null;
+		
 		try {
 			con = sql.MyConnection.getConnection();
-			String showcSQL ="SELECT  com_no,emp_no,com_start,com_end,com_late,com_sick\r\n" + 
-							 "FROM    COMMUTE\r\n" + 
-							 "WHERE   emp_no=?";
-			pstmt = con.prepareStatement(showcSQL);
-			pstmt.setString(1, emp_no);
+			String showcmSQL ="SELECT  to_char(com_start,'MM') month, com_late,com_sick,(com_end-com_start)*24 overWork,TO_CHAR(com_end,'HH24:MI:SS') com_eTime,(TO_CHAR(com_start,'YYMMDD')||'1759') com_isET,(TO_CHAR(com_end,'YYMMDDHH24MI')) com_endD\r\n" + 
+								"FROM    COMMUTE \r\n" + 
+								"WHERE   com_start>=?||'01-01' AND com_start<?||'-12-31'\r\n" + 
+								"AND     emp_no=?";
+			pstmt = con.prepareStatement(showcmSQL);
+			pstmt.setString(1, year);
+			pstmt.setString(2, year);
+			pstmt.setString(3, emp_no);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				list.add(new Commute(
-						rs.getString("com_no"),
-						rs.getString("emp_no"),
-						rs.getString("com_start"),
-						rs.getString("com_end"),
-						rs.getString("com_late"),
-						rs.getString("com_sick")
-				));
+				if(!(Integer.parseInt(rs.getString("month"))==month)) {
+					month=Integer.parseInt(rs.getString("month"));
+					if(cm!=null) {
+						cm.setWorkDay(workDay);
+						cm.setGoodDay(goodDay);
+						cm.setLateDay(lateDay);
+						cm.setEarlyDay(earlyDay);
+						cm.setSickDay(sickDay);
+						cm.setOverWork(overWork);
+						list.add(cm);
+					}
+					cm=new CommuteM(Integer.parseInt(rs.getString("month")));
+					workDay=0;
+					goodDay=0;
+					lateDay=0;
+					earlyDay=0;
+					sickDay=0;
+					overWork=0;
+				}
+				workDay++;
+				
+				if(!rs.getString("com_late").equals("0")) {
+					goodDay++;
+				}else {
+					lateDay++;
+				}
+				if(!rs.getString("com_sick").equals("1")) {
+					sickDay++;
+				}
+				if(Integer.parseInt(rs.getString("com_isET"))>Integer.parseInt(rs.getString("com_endD"))) {
+					earlyDay++;
+				}
+				overWork+=(int)Double.parseDouble((rs.getString("overWork")));
 			}
+			cm.setWorkDay(workDay);
+			cm.setGoodDay(goodDay);
+			cm.setLateDay(lateDay);
+			cm.setEarlyDay(earlyDay);
+			cm.setSickDay(sickDay);
+			cm.setOverWork(overWork);
+			list.add(cm);
 		}finally {
 			MyConnection.close(rs, pstmt, con);
 		}
 		return list;
-	}*/
+	}
 
 }

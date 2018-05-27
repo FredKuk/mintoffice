@@ -5,6 +5,7 @@ import java.util.List;
 import dao.CommuteDAO;
 import dao.CommuteDAOOracle;
 import vo.Commute;
+import vo.CommuteM;
 
 public class CommuteService {
 	private CommuteDAO dao = new CommuteDAOOracle();
@@ -39,6 +40,10 @@ public class CommuteService {
 
 	public List<Commute> showCommute(String emp_no) throws Exception {
 		return dao.showCommute(emp_no);
+	}
+
+	public List<CommuteM> showMonthCommute(String emp_no,String year) throws Exception{
+		return dao.showCommuteM(emp_no,year);
 	}
 
 }
