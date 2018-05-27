@@ -24,11 +24,11 @@
 		"title":"Leave early",
 		"backgroundColor":"#ffff4d",
 	</c:when>
-	<c:when test="${item.com_late eq '1'}">
+	<c:when test="${item.com_late eq '0'}">
 		"title":"Good",
 		"backgroundColor":"#00BFFF",
 	</c:when>
-	<c:when test="${item.com_late eq '0'}">	
+	<c:when test="${item.com_late eq '1'}">	
 		"title":"Late",
 		"backgroundColor":"#FF3399",
 	</c:when>

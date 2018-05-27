@@ -63,7 +63,7 @@ $(document).ready(function() {
 					if(gw>90){
 						color="#6495ED";
 					}else if(gw>75){
-						color="#FFFF00";
+						color="#808000";
 					}else{
 						color="#FF4500";
 					}
@@ -83,7 +83,7 @@ $(document).ready(function() {
 				if(gwS>90){
 					colorS="#6495ED";
 				}else if(gwS>75){
-					colorS="#FFFF00";
+					colorS="#808000";
 				}else{
 					colorS="#FF4500";
 				}
@@ -175,7 +175,7 @@ $(document).ready(function() {
 					<th>지각일수</th>
 					<th>조퇴일수</th>
 					<th>병가일수</th>
-					<th>초과근무시간</th>
+					<th>야근시간</th>
 				</tr>
 			</thead>
 			<tbody id='mtTbody'>
@@ -188,7 +188,7 @@ $(document).ready(function() {
 					<th>지각일수</th>
 					<th>조퇴일수</th>
 					<th>병가일수</th>
-					<th>초과근무시간</th>
+					<th>야근시간</th>
 				</tr>
 				<tr id='mtTfoot'>
 				</tr>

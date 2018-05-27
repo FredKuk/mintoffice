@@ -228,7 +228,7 @@ public class CommuteDAOOracle implements CommuteDAO {
 		ResultSet rs = null;
 		try {
 			con = sql.MyConnection.getConnection();
-			String showcSQL ="SELECT  com_no,emp_no,com_start,com_end,com_late,com_sick,TO_CHAR(com_start,'HH24:MI:SS') com_sTime, TO_CHAR(com_end,'HH24:MI:SS') com_eTime,(TO_CHAR(com_start,'YYMMDD')||'1759') com_isET,(TO_CHAR(SYSDATE,'YYMMDDHH24MI')) com_endD\r\n" + 
+			String showcSQL ="SELECT  com_no,emp_no,com_start,com_end,com_late,com_sick,TO_CHAR(com_start,'HH24:MI:SS') com_sTime, TO_CHAR(com_end,'HH24:MI:SS') com_eTime,(TO_CHAR(com_start,'YYMMDD')||'1759') com_isET,(TO_CHAR(com_end,'YYMMDDHH24MI')) com_endD\r\n" + 
 							"FROM    COMMUTE \r\n" + 
 							"WHERE   emp_no=?";
 			pstmt = con.prepareStatement(showcSQL);
@@ -280,10 +280,11 @@ public class CommuteDAOOracle implements CommuteDAO {
 		
 		try {
 			con = sql.MyConnection.getConnection();
-			String showcmSQL ="SELECT  to_char(com_start,'MM') month, com_late,com_sick,(com_end-com_start)*24 overWork,TO_CHAR(com_end,'HH24:MI:SS') com_eTime,(TO_CHAR(com_start,'YYMMDD')||'1759') com_isET,(TO_CHAR(com_end,'YYMMDDHH24MI')) com_endD\r\n" + 
+			String showcmSQL ="SELECT  to_char(com_start,'MM') month, com_late,com_sick,(com_end-com_start)*24-9 overWork,TO_CHAR(com_end,'HH24:MI:SS') com_eTime,(TO_CHAR(com_start,'YYMMDD')||'1759') com_isET,(TO_CHAR(com_end,'YYMMDDHH24MI')) com_endD\r\n" + 
 								"FROM    COMMUTE \r\n" + 
 								"WHERE   com_start>=?||'01-01' AND com_start<?||'-12-31'\r\n" + 
-								"AND     emp_no=?";
+								"AND     emp_no=?"+
+								"ORDER BY month";
 			pstmt = con.prepareStatement(showcmSQL);
 			pstmt.setString(1, year);
 			pstmt.setString(2, year);
@@ -311,18 +312,21 @@ public class CommuteDAOOracle implements CommuteDAO {
 				}
 				workDay++;
 				
-				if(!rs.getString("com_late").equals("0")) {
+				if(rs.getString("com_late").equals("0")) {
 					goodDay++;
 				}else {
 					lateDay++;
 				}
-				if(!rs.getString("com_sick").equals("1")) {
+				if(!rs.getString("com_sick").equals("0")) {
 					sickDay++;
 				}
 				if(Integer.parseInt(rs.getString("com_isET"))>Integer.parseInt(rs.getString("com_endD"))) {
 					earlyDay++;
 				}
-				overWork+=(int)Double.parseDouble((rs.getString("overWork")));
+				int ow=(int)Double.parseDouble((rs.getString("overWork")));
+				if(ow>0) {
+					overWork+=ow;
+				}
 			}
 			cm.setWorkDay(workDay);
 			cm.setGoodDay(goodDay);
