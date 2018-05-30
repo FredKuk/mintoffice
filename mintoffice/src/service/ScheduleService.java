@@ -1,36 +1,67 @@
 package service;
 
+import java.lang.reflect.Method;
 import java.util.List;
 
-import dao.ScheduleDAO;
+import dao.Dao;
 import dao.ScheduleDAOOracle;
 import vo.Schedule;
 
 
-public class ScheduleService {
-private ScheduleDAO dao = new ScheduleDAOOracle();
+public class ScheduleService implements Service{
+	private Dao dao =null;
+	private static  volatile ScheduleService scheduleService;
+	Class clazz=null;
+	
+	private ScheduleService(){
+		dao = ScheduleDAOOracle.getInstance();
+		try {
+			clazz=Class.forName("dao.ScheduleDAOOracle");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static  ScheduleService getInstance(){
+		if(scheduleService==null){
+			synchronized (ScheduleService.class){
+				if(scheduleService==null){
+					System.out.println("Hello4");
+					scheduleService=new ScheduleService();
+				}
+			}
+		}
+		return new ScheduleService();
+	}
 	
 	public void insert(Schedule s) throws Exception{
-		dao.insert(s);
+		Method m=clazz.getDeclaredMethod("insert", Schedule.class);
+		m.invoke(dao, s);
 	}
 
 	public List<Schedule> showps(String emp_no) throws Exception{
-		return dao.showps(emp_no);
+		Method m=clazz.getDeclaredMethod("showps", String.class);
+		return (List<Schedule>)m.invoke(dao, emp_no);
 	}
 	
 	public List<Schedule> showts(String emp_no) throws Exception{
-		return dao.showts(emp_no);
+		Method m=clazz.getDeclaredMethod("showts", String.class);
+		return (List<Schedule>)m.invoke(dao, emp_no);
 	}
 	
 	public List<Schedule> showcs() throws Exception{
-		return dao.showcs();
+		Method m=clazz.getDeclaredMethod("showcs");
+		return (List<Schedule>)m.invoke(dao);
 	}
 
 	public void modify(Schedule s) throws Exception{
-		dao.modify(s);
+		Method m=clazz.getDeclaredMethod("modify", Schedule.class);
+		m.invoke(dao, s);
 	}
 
 	public void delete(String schedule_no) throws Exception{
-		dao.delete(schedule_no);
+		Method m=clazz.getDeclaredMethod("delete", String.class);
+		m.invoke(dao, schedule_no);
 	}
 }

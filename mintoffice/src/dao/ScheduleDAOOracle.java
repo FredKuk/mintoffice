@@ -10,9 +10,25 @@ import java.util.List;
 import sql.MyConnection;
 import vo.Schedule;
 
-public class ScheduleDAOOracle implements ScheduleDAO {
+public class ScheduleDAOOracle implements Dao {
 
-	@Override
+	private static  volatile ScheduleDAOOracle scheduleDAOOracle;
+	
+	private ScheduleDAOOracle(){
+	}
+	
+	public static ScheduleDAOOracle getInstance(){
+		if(scheduleDAOOracle==null){
+			synchronized (MemoDAOOracle.class){
+				if(scheduleDAOOracle==null){
+					scheduleDAOOracle=new ScheduleDAOOracle();
+				}
+			}
+		}
+		return new ScheduleDAOOracle();
+	}
+	
+	//@Override
 	public void insert(Schedule s) throws Exception {
 		/*2)DB와 연결 */
 		Connection con = null;
@@ -43,7 +59,7 @@ public class ScheduleDAOOracle implements ScheduleDAO {
 		}
 	}
 
-	@Override
+	//@Override
 	public List<Schedule> showps(String emp_no) throws Exception{
 		List<Schedule> list = new ArrayList<>();
 		Connection con = null;
@@ -77,7 +93,7 @@ public class ScheduleDAOOracle implements ScheduleDAO {
 		return list;
 	}
 
-	@Override
+	//@Override
 	public List<Schedule> showts(String emp_no) throws Exception{
 		List<Schedule> list = new ArrayList<>();
 		Connection con = null;
@@ -113,7 +129,7 @@ public class ScheduleDAOOracle implements ScheduleDAO {
 		return list;
 	}
 
-	@Override
+	//@Override
 	public List<Schedule> showcs() throws Exception{
 		List<Schedule> list = new ArrayList<>();
 		Connection con = null;
@@ -146,7 +162,7 @@ public class ScheduleDAOOracle implements ScheduleDAO {
 		return list;
 	}
 
-	@Override
+	//@Override
 	public void modify(Schedule s) throws Exception{
 		/*2)DB와 연결 */
 		Connection con = null;
@@ -183,7 +199,7 @@ public class ScheduleDAOOracle implements ScheduleDAO {
 		}
 	}
 
-	@Override
+	//@Override
 	public void delete(String schedule_no) throws Exception {
 		/*2)DB와 연결 */
 		Connection con = null;

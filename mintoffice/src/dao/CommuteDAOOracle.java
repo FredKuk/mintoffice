@@ -16,9 +16,24 @@ import vo.CommuteDBean;
 import vo.CommuteM;
 import vo.OutWorkD;
 
-public class CommuteDAOOracle implements CommuteDAO {
-
-	@Override
+public class CommuteDAOOracle implements Dao {
+	private static  volatile CommuteDAOOracle commuteDAOOracle;
+		
+	private CommuteDAOOracle(){
+	}
+	
+	public static CommuteDAOOracle getInstance(){
+		if(commuteDAOOracle==null){
+			synchronized (CommuteDAOOracle.class){
+				if(commuteDAOOracle==null){
+					commuteDAOOracle=new CommuteDAOOracle();
+				}
+			}
+		}
+		return new CommuteDAOOracle();
+	}
+	
+	//@Override
 	public String isWork(String emp_no) throws Exception {
 		/*2)DB와 연결 */
 		Connection con = null;
@@ -50,7 +65,7 @@ public class CommuteDAOOracle implements CommuteDAO {
 		}
 	}
 
-	@Override
+	//@Override
 	public void arrive(String emp_no) throws Exception {
 		/*2)DB와 연결 */
 		Connection con = null;
@@ -81,7 +96,7 @@ public class CommuteDAOOracle implements CommuteDAO {
 		}
 	}
 
-	@Override
+	//@Override
 	public void gohome(String com_no) throws Exception {
 		/*2)DB와 연결 */
 		Connection con = null;
@@ -109,7 +124,7 @@ public class CommuteDAOOracle implements CommuteDAO {
 		}
 	}
 
-	@Override
+	//@Override
 	public String isOut(String emp_no) throws Exception {
 		/*2)DB와 연결 */
 		Connection con = null;
@@ -141,7 +156,7 @@ public class CommuteDAOOracle implements CommuteDAO {
 		}
 	}
 	
-	@Override
+	//@Override
 	public void goout(String emp_no) throws Exception {
 		/*2)DB와 연결 */
 		Connection con = null;
@@ -167,7 +182,7 @@ public class CommuteDAOOracle implements CommuteDAO {
 		}
 	}
 
-	@Override
+	//@Override
 	public void comeback(String out_no) throws Exception {
 		/*2)DB와 연결 */
 		Connection con = null;
@@ -195,7 +210,7 @@ public class CommuteDAOOracle implements CommuteDAO {
 		}
 	}
 
-	@Override
+	//@Override
 	public void illness(String com_no) throws Exception {
 		/*2)DB와 연결 */
 		Connection con = null;
@@ -224,7 +239,7 @@ public class CommuteDAOOracle implements CommuteDAO {
 		}
 	}
 	
-	@Override
+	//@Override
 	public List<Commute> showCommute(String emp_no) throws Exception {
 		List<Commute> list = new ArrayList<>();
 		Connection con = null;
@@ -265,7 +280,7 @@ public class CommuteDAOOracle implements CommuteDAO {
 		return list;
 	}
 	
-	@Override
+	//@Override
 	public List<CommuteM> showCommuteM(String emp_no,String year) throws Exception {
 		List<CommuteM> list = new ArrayList<>();
 		Connection con = null;
@@ -345,7 +360,7 @@ public class CommuteDAOOracle implements CommuteDAO {
 		return list;
 	}
 
-	@Override
+	//@Override
 	public int getDayCCount(String ldDate, String rdDate, String emp_no) throws Exception {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -371,7 +386,7 @@ public class CommuteDAOOracle implements CommuteDAO {
 		}
 	}
 
-	@Override
+	//@Override
 	public List<CommuteDBean> findAll(String ldDate, String rdDate, String emp_no, int intPage) throws Exception {
 		Connection con = null;
 		PreparedStatement pstmt = null;

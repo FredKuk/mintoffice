@@ -10,9 +10,25 @@ import java.util.List;
 import sql.MyConnection;
 import vo.Memo;
 
-public class MemoDAOOracle implements MemoDAO {
+public class MemoDAOOracle implements Dao {
+	
+	private static  volatile MemoDAOOracle memoDAOOracle;
+	
+	private MemoDAOOracle(){
+	}
+	
+	public static MemoDAOOracle getInstance(){
+		if(memoDAOOracle==null){
+			synchronized (MemoDAOOracle.class){
+				if(memoDAOOracle==null){
+					memoDAOOracle=new MemoDAOOracle();
+				}
+			}
+		}
+		return new MemoDAOOracle();
+	}
 
-	@Override
+	//@Override
 	public int selectCount(String emp_no) throws Exception {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -32,7 +48,7 @@ public class MemoDAOOracle implements MemoDAO {
 		}
 	}
 
-	@Override
+	//@Override
 	public List<Memo> selectAll(String emp_no,int page) throws Exception {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -71,7 +87,7 @@ public class MemoDAOOracle implements MemoDAO {
 		}
 	}
 
-	@Override
+	//@Override
 	public void insert(Memo m) throws Exception {
 		/*2)DB와 연결 */
 		Connection con = null;
@@ -97,7 +113,7 @@ public class MemoDAOOracle implements MemoDAO {
 		}
 	}
 
-	@Override
+	//@Override
 	public void modify(Memo m) throws Exception {
 		/*2)DB와 연결 */
 		Connection con = null;
@@ -127,7 +143,7 @@ public class MemoDAOOracle implements MemoDAO {
 		}		
 	}
 
-	@Override
+	//@Override
 	public void delete(String memo_no) throws Exception {
 		/*2)DB와 연결 */
 		Connection con = null;

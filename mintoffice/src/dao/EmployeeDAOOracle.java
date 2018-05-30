@@ -9,15 +9,30 @@ import java.util.List;
 import sql.MyConnection;
 import vo.Employee;
 
-public class EmployeeDAOOracle implements EmployeeDAO {
-
-	@Override
+public class EmployeeDAOOracle implements Dao {
+	private static volatile EmployeeDAOOracle employeeDAOOracle;
+	
+	private EmployeeDAOOracle(){
+	}
+	
+	public static EmployeeDAOOracle getInstance(){
+		if(employeeDAOOracle==null){
+			synchronized (EmployeeDAOOracle.class){
+				if(employeeDAOOracle==null){
+					employeeDAOOracle=new EmployeeDAOOracle();
+				}
+			}
+		}
+		return new EmployeeDAOOracle();
+	}
+	
+	//@Override
 	public void insert(Employee c) throws Exception {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
+	//@Override
 	public Employee selectById(String id) throws Exception {
 		/*2)DB와 연결 */
 		Connection con = null;
@@ -64,19 +79,19 @@ public class EmployeeDAOOracle implements EmployeeDAO {
 		}
 	}
 
-	@Override
+	//@Override
 	public List<Employee> selectAll() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	//@Override
 	public void update(Employee c) throws Exception {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
+	//@Override
 	public void delete(String id) throws Exception {
 		// TODO Auto-generated method stub
 

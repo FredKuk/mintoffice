@@ -8,16 +8,16 @@
   </welcome-file-list>
   <servlet>
     <description></description>
-    <display-name>FrontController</display-name>
-    <servlet-name>FrontController</servlet-name>
-    <servlet-class>control.FrontController</servlet-class>
+    <display-name>DispatcherServlet</display-name>
+    <servlet-name>DispatcherServlet</servlet-name>
+    <servlet-class>control.DispatcherServlet</servlet-class>
     <init-param>
       <param-name>contextConfigLocation</param-name>
       <param-value>/WEB-INF/mintoffice.properties</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>
-    <servlet-name>FrontController</servlet-name>
+    <servlet-name>DispatcherServlet</servlet-name>
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
   <filter>
