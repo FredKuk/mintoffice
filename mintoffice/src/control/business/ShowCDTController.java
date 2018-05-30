@@ -37,21 +37,19 @@ public class ShowCDTController implements Controller {
 		String emp_no = (String) session.getAttribute("emp_no");
 		String ldDate = request.getParameter("ldDate");
 		String rdDate = request.getParameter("rdDate");
+		String page=request.getParameter("page");
+		
 		int intPage=1;
-		/*if(page != null) {
+		if(page != null) {
 			intPage = Integer.parseInt(page);
-		}*/
+		}
 		try {
 			// 게시물 총목록수
 			int totalCount = service.getDayCCount(ldDate,rdDate,emp_no);
-			System.out.println(ldDate);
-			System.out.println(rdDate);
-			System.out.println(emp_no);
-			System.out.println("totalCount : " + totalCount);
 			
 			// 총페이지수계산
 			int totalPage = 0;
-			int cntPerPage = 23;// 1페이지별 x건씩 보여준다
+			int cntPerPage = 20;// 1페이지별 x건씩 보여준다
 			totalPage = (int) Math.ceil((double) totalCount / cntPerPage);
 
 			// 페이지그룹에서 쓰일 시작페이지값, 끝페이지값계산
@@ -69,6 +67,11 @@ public class ShowCDTController implements Controller {
 			pb.setStartPage(startPage); // 시작페이지
 			pb.setEndPage(endPage); // 끝페이지
 
+			System.out.println("CDT ldDate :"+ldDate);
+			System.out.println("CDT rdDate :"+rdDate);
+			System.out.println("CDT page :"+page);
+			System.out.println("CDT emp_no : "+emp_no);
+			System.out.println("CDT totalCount : " + totalCount);
 			System.out.println("intPage : "+intPage);
 			System.out.println("totalPage : "+totalPage);
 			System.out.println("list Size : "+list.size());

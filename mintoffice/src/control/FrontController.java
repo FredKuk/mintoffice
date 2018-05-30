@@ -34,7 +34,6 @@ public class FrontController extends HttpServlet {
 
 	public void init() throws ServletException {
 		super.init();
-
 		env = new Properties();
 		ServletContext application = getServletContext();
 		String envFileName = this.getInitParameter("contextConfigLocation");

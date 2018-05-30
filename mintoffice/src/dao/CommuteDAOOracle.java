@@ -393,7 +393,7 @@ public class CommuteDAOOracle implements CommuteDAO {
 		try {
 			con = sql.MyConnection.getConnection();
 			pstmt = con.prepareStatement(selectAllSQL);
-			int cntPerPage=23;//1페이지별 3건씩 보여준다
+			int cntPerPage=20;//1페이지별 3건씩 보여준다
 			int endRow=cntPerPage * intPage;
 			int startRow=endRow-cntPerPage+1; 			
 			pstmt.setString(1, emp_no);

@@ -1,122 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <script>
 $(function(){
-   	$('#personal_menu a').click(function(){
-   		var idValue= $(this).attr('id');
-		$('section').empty();
-		switch(idValue){
-		case 'personal_info':	//개인설정
-			console.log("Here");
-			$.ajax({
-				method:'POST',
-				url: 'contents/personal/eachinfo.jsp',
-				success: function(data){
-					$('section').html(data);
-				}
-			});
-			break;
-			
-		case 'emp_info':	//직원정보
-			$.ajax({
-				method:'POST',
-				url: 'contents/personal/empinfo.jsp',
-				success: function(data){
-					$('section').html(data);
-				}
-			});
-			break;
-		
-		case 'rcv_msg':	//쪽지함
-			$.ajax({
-				method:'POST',
-				url: 'contents/personal/rcvmsg.jsp',
-				success: function(data){
-					$('section').html(data);
-				}
-			});
-			break;
-			
-		case 'sent_msg': 	//보낸쪽지함
-			$.ajax({
-				method:'POST',
-				url: 'contents/personal/sentmsg.jsp',
-				success: function(data){
-					$('section').html(data);
-				}
-			});
-			break;
-		
-		case 'msgbox_msg'://Message 
-			$.ajax({
-				method:'POST',
-				url: 'contents/personal/msgbox.jsp',
-				success: function(data){
-					$('section').html(data);
-				}
-			});
-			break;
-		
-			case 'schedule':
-			case 'all_schedule':
-				/* console.log("Here"); */
-				$.ajax({
-					method:'POST',
-					url: 'viewallschedule.do',
-					success: function(data){
-						$('section').html(data);
-					}
-				});
-				break;
-			case 'personal_schedule':
-				/* console.log("Here"); */
-				$.ajax({
-					method:'POST',
-					url: 'viewpersonalschedule.do',
-					success: function(data){
-						$('section').html(data);
-					}
-				});
-				break;
-			case 'team_schedule':
-				/* console.log("Here"); */
-				$.ajax({
-					method:'POST',
-					url: 'viewteamschedule.do',
-					success: function(data){
-						$('section').html(data);
-					}
-				});
-				break;
-			case 'company_schedule':
-				/* console.log("Here"); */
-				$.ajax({
-					method:'POST',
-					url: 'viewcompanyschedule.do',
-					success: function(data){
-						$('section').html(data);
-					}
-				});
-				break;
-			case 'memo':
-				$.ajax({
-					method:'POST',
-					url: 'viewmemo.do',
-					success: function(data){
-						$('section').html(data);
-					}
-				});
-				break;
-			case 'business':
-				$.ajax({
-					method:'POST',
-					url: 'viewbusiness.do',
-					success: function(data){
-						$('#contents').html(data);
-					}
-				});
-				break;			
-		}
-   	});
 	$("div#all_schedule").hover(function() {
 		   $("div#schedule_detail").css("display", "block");
 		   $("div#schedule_detail a").css("font-size","12px");
@@ -130,7 +14,7 @@ $(function(){
 		   $(this).css("background","#A4FFDE");
 		}, function(){
 			$(this).css("background","white");
-		});	
+	});	
 });
 </script>
 <style>

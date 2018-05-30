@@ -8,6 +8,7 @@ public class PageBean<T> {
 	private List<T> list;
 	private int startPage;
 	private int endPage;
+	
 	public PageBean() {
 		super();
 	}

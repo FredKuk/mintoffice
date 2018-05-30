@@ -48,4 +48,5 @@ $(function(){
 	$('#logoutNoBtn').on('click',function(){
 		location.href="home.jsp";
 	});
+	
 });

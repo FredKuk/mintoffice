@@ -21,7 +21,13 @@
 	src="https://use.fontawesome.com/releases/v5.0.12/js/all.js"
 	integrity="sha384-Voup2lBiiyZYkRto2XWqbzxHXwzcm4A5RfdfG6466bu5LqjwwrjXCMBQBLMWh7qR"
 	crossorigin="anonymous"></script>
+	
 <script src="js/home/home.js"></script>
+<script src="js/personal/viewPersonal.js"></script>
+<script src="js/personal/schedule.js"></script>
+<script src="js/business/viewBusiness.js"></script>
+<script src="js/business/commute.js"></script>
+
 <link href='css/calendar/fullcalendar.min.css' rel='stylesheet' />
 <link href='css/calendar/fullcalendar.print.min.css' rel='stylesheet' media='print' />
 <script src='js/calendar/moment.min.js'></script>

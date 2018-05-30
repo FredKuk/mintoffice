@@ -2,101 +2,19 @@
 	pageEncoding="UTF-8"%>
 <script>
 $(document).ready(function() {
-	var workDaySum=0;
-	var goodDaySum=0;
-	var lateDaySum=0;
-	var earlyDaySum=0;
-	var sickDaySum=0;
-	var overWorkSum=0;
-	
-	var month=0;
-	var workDay=0;
-	var goodDay=0;
-	var lateDay=0;
-	var earlyDay=0;
-	var sickDay=0;
-	var overWork=0;
-	
-	/* init */
-	showmtYear();
-
-	/* searching */
-	$('#mtBtn').click(function(){
-		showmtYear();
-	});
-	
-	/* searching logic */
-	function showmtYear(){
-		$.ajax({
-			url : 'showmtyear.do',
-			data: {year:$('#mtSelect').val()},
-			method : 'post',
-			success : function(data) {
-				$('#mtTbody').empty();
-				$('#mtTfoot').empty();
-				workDaySum=0;
-				goodDaySum=0;
-				lateDaySum=0;
-				earlyDaySum=0;
-				sickDaySum=0;
-				overWorkSum=0;
-				
-				var jsonArrObj = JSON.parse(data);
-				$(jsonArrObj).each(function(index, jsonObj) {
-					month=jsonObj.month;
-					workDay=jsonObj.workDay;
-					goodDay=jsonObj.goodDay;
-					lateDay=jsonObj.lateDay;
-					earlyDay=jsonObj.earlyDay;
-					sickDay=jsonObj.sickDay;
-					overWork=jsonObj.overWork;
-					
-					workDaySum+=workDay;
-					goodDaySum+=goodDay;
-					lateDaySum+=lateDay;
-					earlyDaySum+=earlyDay;
-					sickDaySum+=sickDay;
-					overWorkSum+=overWork;
-					
-					var gw=goodDay/workDay*100;
-					var color="";
-					if(gw>90){
-						color="#6495ED";
-					}else if(gw>75){
-						color="#808000";
-					}else{
-						color="#FF4500";
-					}
-					
-					$('#mtTbody').append('<tr class="monthWorkTimeContents">');
-					$('#mtTbody').append('<td>'+month+'월</td>');
-					$('#mtTbody').append('<td>'+workDay+'</td>');
-					$('#mtTbody').append('<td>'+goodDay+'/'+workDay+'&nbsp;<span style="color:'+color+'">('+gw.toFixed(1)+'%)</span></td>');
-					$('#mtTbody').append('<td>'+lateDay+'</td>');
-					$('#mtTbody').append('<td>'+earlyDay+'</td>');
-					$('#mtTbody').append('<td>'+sickDay+'</td>');
-					$('#mtTbody').append('<td>'+overWork+'</td>');
-					$('#mtTbody').append('</tr>');
-				});
-				var gwS=goodDaySum/workDaySum*100;
-				var colorS="";
-				if(gwS>90){
-					colorS="#6495ED";
-				}else if(gwS>75){
-					colorS="#808000";
-				}else{
-					colorS="#FF4500";
-				}
-				$('#mtTfoot').append('<td> 1~12월 </td>');
-				$('#mtTfoot').append('<td>'+workDaySum+'</td>');
-				$('#mtTfoot').append('<td>'+goodDaySum+'/'+workDaySum+'&nbsp;<span style="color:'+colorS+'">('+gwS.toFixed(1)+'%)</td>');
-				$('#mtTfoot').append('<td>'+lateDaySum+'</td>');
-				$('#mtTfoot').append('<td>'+earlyDaySum+'</td>');
-				$('#mtTfoot').append('<td>'+sickDaySum+'</td>');
-				$('#mtTfoot').append('<td>'+overWorkSum+'</td>');
-			}
-		});
-	}
+	workDaySum=0;
+	goodDaySum=0;
+	lateDaySum=0;
+	earlyDaySum=0;
+	sickDaySum=0;
+	overWorkSum=0;
+	month=0;
+	workDay=0;
+	goodDay=0;
+	lateDay=0;
+	earlyDay=0;
+	sickDay=0;
+	overWork=0;
 });
 </script>
 
