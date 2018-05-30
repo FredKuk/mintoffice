@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script>
 $(function(){
+	
 <%String name = request.getParameter("searchName");
 			if (name != null) {
 				//input객체의 name에 대입%> 		$("input[name=searchName]").val("<%=name%>");
@@ -18,12 +19,12 @@ $(function(){
 	");
 <%}%>
 	$("#empInfoForm").submit(function() {
-			alert('test');
 			$.ajax({
 				method : "post",
 				data : $("form").serialize(),
 				url : "empinfo.do",
 				success : function(data) {
+					console.log("asdf");
 					if ($("section").length > 0) {
 						$("section").empty();
 						$("section").html(data.trim());

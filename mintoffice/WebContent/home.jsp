@@ -25,6 +25,7 @@
 <script src="js/home/home.js"></script>
 <script src="js/personal/viewPersonal.js"></script>
 <script src="js/personal/schedule.js"></script>
+<script src="js/personal/memo.js"></script>
 <script src="js/business/viewBusiness.js"></script>
 <script src="js/business/commute.js"></script>
 
