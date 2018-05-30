@@ -1,6 +1,36 @@
 /** ********************** day table ************************ */
+var cPage = 1;
+
+function initCDT(){
+	var dt = new Date();
+	// Display the month, day, and year. getMonth() returns a 0-based number.
+	var month = dt.getMonth()+1;
+	if(month<10){
+		month="0"+month;
+	}
+	var day = dt.getDate();
+	var year = dt.getFullYear();
+	var lday=year+'-'+month+'-01';
+	var rday=year+'-'+month+'-'+day;
+	$('input[name=ldDate]').val(lday);
+	$('input[name=rdDate]').val(rday);
+	cPage=1;
+	$.ajax({
+		method : 'POST',
+		url : 'showcdt.do',
+		data : {
+			ldDate : $('input[name=ldDate').val(),
+			rdDate : $('input[name=rdDate').val(),
+			page : cPage
+		},
+		success : function(data) {
+			$('#dtBody').empty();
+			$('#dtBody').append(data);
+		}
+	});	
+}
+
 $(function() {
-	var cPage = 1;
 	$(document).on("submit", "#cdtForm", function() {
 		cPage = 1;
 		$.ajax({
@@ -14,16 +44,49 @@ $(function() {
 			success : function(data) {
 				$('#dtBody').empty();
 				$('#dtBody').append(data);
-				console.log('success');
 			}
 		});
 		return false;
 	});
-
+	
+	$(document).on("click", "#cdtLaquo", function() {
+		cPage = Number(cPage)-1;
+		console.log('LQ cPage : ' + cPage);
+		$.ajax({
+			method : 'POST',
+			url : 'showcdt.do',
+			data : {
+				ldDate : $('input[name=ldDate').val(),
+				rdDate : $('input[name=rdDate').val(),
+				page : cPage
+			},
+			success : function(data) {
+				$('#dtBody').empty();
+				$('#dtBody').append(data);
+			}
+		});
+	});
+	
+	$(document).on("click", "#cdtRaquo", function() {
+		cPage = Number(cPage)+1;
+		console.log('RQ cPage : ' + cPage);
+		$.ajax({
+			method : 'POST',
+			url : 'showcdt.do',
+			data : {
+				ldDate : $('input[name=ldDate').val(),
+				rdDate : $('input[name=rdDate').val(),
+				page : cPage
+			},
+			success : function(data) {
+				$('#dtBody').empty();
+				$('#dtBody').append(data);
+			}
+		});
+	});
+	
 	$(document).on("click", ".cdtPageNum", function() {
-		console.log("hi");
 		cPage = $(this).text();
-		console.log('A value : ' + $(this).text());
 		console.log('cPage : ' + cPage);
 		$.ajax({
 			method : 'POST',
@@ -36,7 +99,6 @@ $(function() {
 			success : function(data) {
 				$('#dtBody').empty();
 				$('#dtBody').append(data);
-				console.log('success');
 			}
 		});
 	});

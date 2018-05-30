@@ -59,6 +59,7 @@ $(function() {
 				url : 'viewdaytable.do',
 				success : function(data) {
 					$('section').html(data);
+					initCDT();
 				}
 			});
 			break;

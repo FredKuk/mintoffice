@@ -10,12 +10,6 @@
 	color: lightblue;
 }
 
-/*   body {
-    margin: 40px 10px;
-    padding: 0;
-    font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
-    font-size: 14px;
-  } */
 #calendar {
 	width: 90%;
 	margin-bottom: 15px;
@@ -45,8 +39,6 @@
 	width: 26%;
 	font-size: 12px;
 }
-
-
 
 #modifyPSB {
 	margin-left: 2px;

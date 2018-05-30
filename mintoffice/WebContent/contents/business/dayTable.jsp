@@ -43,7 +43,7 @@
 }
 
 .workTableSearch>form * {
-	width: 20%;
+	width: 25%;
 	height: 30px;
 	margin-bottom: 2px;
 	text-align: center;
@@ -87,8 +87,7 @@
 			<form id='cdtForm'>
 				<input type="date" name='ldDate' required>&emsp;~&emsp; <input
 					type="date" name='rdDate' style="margin-left: 0px;" required>
-				<input type="submit" class="btn btn-outline-primary btn-sm"
-					value="Submit">
+				<input type="submit" class="btn btn-outline-primary btn-sm" style="margin-left:10px"	value="Submit">
 			</form>
 		</div>
 	</div>

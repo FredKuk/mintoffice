@@ -6,7 +6,10 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="pb" value="${requestScope.pagebean}" />
 <c:set var="list" value="${pb.list}" />
-<table class="workTimeTable">
+<c:if test="${not empty requestScope.result}">
+	<p style="Color:RED">DATE RANGE IS ERROR. LEFT DATE IS NEWER THAN RIGHT ONE.</p>
+</c:if>
+<table class="workTimeTable" style="margin-bottom:10px;">
 	<thead>
 		<tr class="workTimeTableHeader">
 			<th>날짜</th>
@@ -57,22 +60,22 @@
 <c:set var="startPage" value="${pb.startPage}" />
 <c:set var="endPage" value="${pb.endPage}" />
 
-<c:if test="${not(startPage eq endPage)}">
-	<div class="text-center">
+<c:if test="${not(startPage > totalPage) and not(totalPage eq 1) and (totalpage>0)}">
+	<div class="text-center" style="margin-left:40px;">
 		<ul class="pagination" id ='cdtPageInfo'>
 			<c:if test="${not(startPage eq 1)}">
-				<li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+				<li class="page-item"><a class="page-link" id='cdtLaquo' href="#">&laquo;</a></li>
 			</c:if>
 			<c:forEach var="item" begin="${startPage}" end="${endPage}" step="1" varStatus="status">
-				<c:if test="${status.count eq currentPage}">
-					<li class="page-item active"><a class="page-link cdtPageNum" href="#">${status.count}</a></li>
+				<c:if test="${status.current eq currentPage}">
+					<li class="page-item active"><a class="page-link cdtPageNum" href="#">${startPage+status.count-1}</a></li>
 				</c:if>
-				<c:if test="${not(status.count eq currentPage)}">
-					<li class="page-item"><a class="page-link cdtPageNum" href="#">${status.count}</a></li>
+				<c:if test="${not(status.current eq currentPage)}">
+					<li class="page-item"><a class="page-link cdtPageNum" href="#">${startPage+status.count-1}</a></li>
 				</c:if>
 			</c:forEach>
 			<c:if test="${not(endPage eq totalPage)}">
-				<li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+				<li class="page-item"><a class="page-link" id='cdtRaquo' href="#">&raquo;</a></li>
 			</c:if>
 		</ul>
 	</div>

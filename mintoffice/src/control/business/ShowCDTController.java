@@ -54,7 +54,14 @@ public class ShowCDTController implements Controller {
 
 			// 페이지그룹에서 쓰일 시작페이지값, 끝페이지값계산
 			int cntPerPageGroup = 5; // 페이지그룹별 5페이지씩 보여준다
-			int startPage = (int) Math.floor((double) (intPage) / (cntPerPageGroup)) * cntPerPageGroup + 1;
+			int startPage=0;
+			if(intPage%cntPerPageGroup==0) {
+				startPage=intPage-cntPerPageGroup+1;
+			}else {
+				startPage=intPage/cntPerPageGroup;
+				startPage=startPage*cntPerPageGroup+1;
+			}
+			//int startPage = (int) Math.floor((double) (intPage) / (cntPerPageGroup)) * cntPerPageGroup + 1;
 			int endPage = startPage + cntPerPageGroup - 1;
 			if (endPage > totalPage) {
 				endPage = totalPage;
@@ -82,7 +89,7 @@ public class ShowCDTController implements Controller {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			request.setAttribute("result", e.getMessage());
+			request.setAttribute("result", "DATE FORMAT IS ERROR. LEFT DATE IS LATEST.");
 		}
 		String forwardURL = "contents/business/viewCDT.jsp";
 		return forwardURL;
