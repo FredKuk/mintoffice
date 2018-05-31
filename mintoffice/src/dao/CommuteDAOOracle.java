@@ -30,7 +30,7 @@ public class CommuteDAOOracle implements Dao {
 				}
 			}
 		}
-		return new CommuteDAOOracle();
+		return commuteDAOOracle;
 	}
 	
 	//@Override

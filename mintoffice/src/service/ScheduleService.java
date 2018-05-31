@@ -32,7 +32,7 @@ public class ScheduleService implements Service{
 				}
 			}
 		}
-		return new ScheduleService();
+		return scheduleService;
 	}
 	
 	public void insert(Schedule s) throws Exception{

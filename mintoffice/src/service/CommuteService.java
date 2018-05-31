@@ -33,7 +33,7 @@ public class CommuteService implements Service{
 				}
 			}
 		}
-		return new CommuteService();
+		return commuteService;
 	}
 	
 	public String isWork(String emp_no) throws Exception {

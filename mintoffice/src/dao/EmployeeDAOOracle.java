@@ -23,7 +23,7 @@ public class EmployeeDAOOracle implements Dao {
 				}
 			}
 		}
-		return new EmployeeDAOOracle();
+		return employeeDAOOracle;
 	}
 	
 	//@Override

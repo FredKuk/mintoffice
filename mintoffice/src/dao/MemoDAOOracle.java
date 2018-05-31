@@ -25,7 +25,7 @@ public class MemoDAOOracle implements Dao {
 				}
 			}
 		}
-		return new MemoDAOOracle();
+		return memoDAOOracle;
 	}
 
 	//@Override

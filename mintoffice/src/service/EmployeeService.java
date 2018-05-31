@@ -32,7 +32,7 @@ public class EmployeeService implements Service {
 				}
 			}
 		}
-		return new EmployeeService();
+		return employeeService;
 	}
 
 	public void signup(Employee e) throws Exception{

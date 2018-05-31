@@ -32,7 +32,7 @@ public class MemoService implements Service{
 				}
 			}
 		}
-		return new MemoService();
+		return memoService;
 	}
 	
 	public int findCount(String emp_no) throws Exception{

@@ -25,7 +25,7 @@ public class ScheduleDAOOracle implements Dao {
 				}
 			}
 		}
-		return new ScheduleDAOOracle();
+		return scheduleDAOOracle;
 	}
 	
 	//@Override

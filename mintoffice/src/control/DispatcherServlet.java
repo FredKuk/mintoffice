@@ -2,9 +2,6 @@ package control;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.Properties;
 
 import javax.servlet.RequestDispatcher;
@@ -14,11 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import service.CommuteService;
-import service.EmployeeService;
-import service.MemoService;
-import service.ScheduleService;
 
 public class DispatcherServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -49,7 +41,6 @@ public class DispatcherServlet extends HttpServlet {
 		System.out.println(request.getServletPath());
 		String path = request.getServletPath();
 
-		Controller c = null;
 		String forwardURL = "";
 
 		String key = path;
