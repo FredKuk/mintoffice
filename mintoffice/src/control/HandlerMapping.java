@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import service.CommuteService;
 import service.EmployeeService;
 import service.MemoService;
+import service.NoticeService;
 import service.ScheduleService;
 import service.Service;
 
@@ -53,6 +54,10 @@ public class HandlerMapping {
 							service=CommuteService.getInstance();
 							m.invoke(obj, service);
 							break;
+						} else if ("service.NoticeService".equals(m.getParameterTypes()[0].getName())) {
+							service=NoticeService.getInstance();
+							m.invoke(obj, service);
+							break;
 						}
 					}
 				}
@@ -77,6 +82,10 @@ public class HandlerMapping {
 						} else if ("service.CommuteService".equals(constructor.getParameters()[0].getType().getName())) {
 							service=CommuteService.getInstance();
 							System.out.println("CommuteService Catch");
+							obj = constructor.newInstance(service);
+						} else if ("service.NoticeService".equals(constructor.getParameters()[0].getType().getName())) {
+							service=NoticeService.getInstance();
+							System.out.println("NoticeService Catch");
 							obj = constructor.newInstance(service);
 						}
 						break;

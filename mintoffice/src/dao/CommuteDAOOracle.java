@@ -500,6 +500,8 @@ public class CommuteDAOOracle implements Dao {
 				if(y<olist.size())
 					od= olist.get(y);
 				if(od==null){
+					if(cd==null)
+						break;
 					cdb=new CommuteDBean(cd.getCompare(),cd.getCom_start(),cd.getCom_end(),cd.getCom_late(),cd.getCom_early(),cd.getCom_sick(),cd.getOverwork(),"-","-");
 					x++;
 					beanlist.add(cdb);

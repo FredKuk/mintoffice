@@ -3,6 +3,15 @@ $(function() {
 		var idValue = $(this).attr('id');
 		$('section').empty();
 		switch (idValue) {
+		case 'noticeboard':
+			$.ajax({
+				method : 'POST',
+				url : 'viewnotice.do',
+				success : function(data) {
+					$('section').html(data);
+				}
+			});
+			break;
 		case 'fileboard':
 			$.ajax({
 				method : 'POST',

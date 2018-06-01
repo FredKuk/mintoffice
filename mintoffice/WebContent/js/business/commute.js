@@ -9,6 +9,9 @@ function initCDT(){
 		month="0"+month;
 	}
 	var day = dt.getDate();
+	if(day<10){
+		day="0"+day;
+	}
 	var year = dt.getFullYear();
 	var lday=year+'-'+month+'-01';
 	var rday=year+'-'+month+'-'+day;

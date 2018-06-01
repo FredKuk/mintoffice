@@ -29,6 +29,9 @@ display:none;
 </section>
 <aside>
 <div class="list-group" id="business_menu"><!-- active disabled -->
+  <a href="#" class="list-group-item list-group-item-action" id="noticeboard" style = "border: none;">
+  	<i class="fas fa-bullhorn"></i>&nbsp;공지사항
+  </a>
   <a href="#" class="list-group-item list-group-item-action" id="fileboard" style = "border: none;">
   	<i class="far fa-save"></i>&nbsp;개인파일함
   </a>

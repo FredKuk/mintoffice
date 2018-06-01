@@ -1,8 +1,5 @@
 package control.business;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,5 +16,4 @@ public class ViewMonthTableController implements Controller {
 		String forwardURL = "contents/business/monthTable.jsp";
 		return forwardURL;
 	}
-
 }
