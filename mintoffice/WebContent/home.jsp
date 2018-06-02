@@ -28,6 +28,7 @@
 <script src="js/personal/memo.js"></script>
 <script src="js/business/viewBusiness.js"></script>
 <script src="js/business/commute.js"></script>
+<script src="js/business/notice.js"></script>
 
 <link href='css/calendar/fullcalendar.min.css' rel='stylesheet' />
 <link href='css/calendar/fullcalendar.print.min.css' rel='stylesheet' media='print' />

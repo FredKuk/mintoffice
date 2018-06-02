@@ -40,8 +40,17 @@ public class EmployeeService implements Service {
 		m.invoke(dao, e);
 	}
 	public String login(String id, String pwd) throws Exception{
+		System.out.println("***ACCESS***");
+		System.out.println("ID : "+id);
+		System.out.println("PWD : "+pwd);
+		System.out.println("************");
 		Method m=clazz.getDeclaredMethod("selectById", String.class);
 		Employee e =(Employee)m.invoke(dao, id);
+		if(e==null) {
+			System.out.println("****SERVER RESPONSE****");
+			System.out.println("LOGIN NULL!");
+			System.out.println("***********************");
+		}
 		if(e !=null) { //아이디가 있는 경우
 			if(e.getPwd().equals(pwd)) {//비밀번호일치
 				//return e.getEmp_no()+"@"+e.getDep_no();

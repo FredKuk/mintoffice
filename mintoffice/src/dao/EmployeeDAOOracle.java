@@ -40,17 +40,21 @@ public class EmployeeDAOOracle implements Dao {
 		PreparedStatement pstmt=null;
 		/*4)DB서버로 부터 결과 수신*/
 		ResultSet rs=null;
-		
+		System.out.println("TOMCAT TRYING TO FIND EMPLOYEE WHOSE ID : "+id);
 		try {
+			System.out.println("TOMCAT GET TRYING TO ACCESS ORACLE DB");
 			con = MyConnection.getConnection();
+			System.out.println("TOMCAT SUCCESSFULLY ACCESS");
 			String loginSQL = 
 					"SELECT * FROM employee WHERE id=?";
 			pstmt = con.prepareStatement(loginSQL);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			if(!rs.next()) { //아이디가 없는경우
+				System.out.println("THERE IS NO EMPLOYEE WHOSE ID IS "+ id);
 				return null;
 			}else {
+				System.out.println(rs.getString("EMP_NO"));
 				return new Employee(
 						rs.getString("EMP_NO"),
 						id,

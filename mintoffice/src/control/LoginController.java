@@ -39,9 +39,12 @@ public class LoginController implements Controller {
 		session.invalidate();
 		try {
 			String result = service.login(idValue, pwdValue);
+			System.out.println("Login Result : "+result);
 			if (!result.equals("-1")) { // 로그인 성공:emp_no, 실패:-1
 				//StringTokenizer st = new StringTokenizer(result,"@");
 				session = request.getSession();
+				System.out.println("Login ID : "+idValue);
+				System.out.println("Emp_No : "+result);
 				session.setAttribute("loginInfo", idValue);
 				session.setAttribute("emp_no", result);
 				/*session.setAttribute("emp_no", st.nextToken());
