@@ -30,6 +30,7 @@ $(function(){
 					url: 'viewbusiness.do',
 					success: function(data){
 						$('#contents').html(data);
+						$('#noticeboard').trigger('click');
 					}
 				});
 				break;		

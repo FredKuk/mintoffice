@@ -9,6 +9,8 @@ $(function() {
 				url : 'viewnotice.do',
 				success : function(data) {
 					$('section').html(data);
+					nsearch="";
+					showNotice(1);
 				}
 			});
 			break;

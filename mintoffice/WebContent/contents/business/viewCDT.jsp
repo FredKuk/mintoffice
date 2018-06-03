@@ -60,7 +60,7 @@
 <c:set var="startPage" value="${pb.startPage}" />
 <c:set var="endPage" value="${pb.endPage}" />
 
-<c:if test="${not(startPage > totalPage) and not(totalPage eq 1) and (totalpage>0)}">
+<c:if test="${not(startPage > totalPage) and not(totalPage eq 1) and (totalPage>0)}">
 	<div class="text-center" style="margin-left:40px;">
 		<ul class="pagination" id ='cdtPageInfo'>
 			<c:if test="${not(startPage eq 1)}">

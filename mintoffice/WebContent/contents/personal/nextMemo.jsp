@@ -6,7 +6,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="pb" value="${requestScope.pagebean}" />
 <c:set var="list" value="${pb.list}" />
-
 <c:forEach items="${list}" var="memo">
 	<div class="memoEach">
 		<div class="card mb-3">

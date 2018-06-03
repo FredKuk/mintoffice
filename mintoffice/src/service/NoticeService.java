@@ -1,7 +1,11 @@
 package service;
 
+import java.lang.reflect.Method;
+import java.util.List;
+
 import dao.Dao;
 import dao.NoticeDAOOracle;
+import vo.Notice;
 
 public class NoticeService implements Service {
 	private Dao dao =null;
@@ -18,7 +22,7 @@ public class NoticeService implements Service {
 		}
 	}
 	
-	public static  NoticeService getInstance(){
+	public static NoticeService getInstance(){
 		if(noticeService==null){
 			synchronized (NoticeService.class){
 				if(noticeService==null){
@@ -29,6 +33,44 @@ public class NoticeService implements Service {
 		}
 		return noticeService;
 	}
-	
 
+	public void insert(Notice n) throws Exception{
+		Method m=clazz.getDeclaredMethod("insert", Notice.class);
+		m.invoke(dao, n);
+	}
+
+	public int count() throws Exception{
+		Method m=clazz.getDeclaredMethod("count");
+		return (int)m.invoke(dao);
+	}
+
+	public List<Notice> findAll(int intPage) throws Exception{
+		Method m=clazz.getDeclaredMethod("findAll",int.class);
+		return (List<Notice>)m.invoke(dao,intPage);
+	}
+
+	public Notice findByNo(String noti_no) throws Exception{
+		Method m=clazz.getDeclaredMethod("findByNo",String.class);
+		return (Notice)m.invoke(dao,noti_no);
+	}
+
+	public void modify(Notice n) throws Exception{
+		Method m=clazz.getDeclaredMethod("modify",Notice.class);
+		m.invoke(dao, n);
+	}
+
+	public void delete(String no) throws Exception {
+		Method m=clazz.getDeclaredMethod("delete",String.class);
+		m.invoke(dao, no);
+	}
+
+	public int searchCount(String search) throws Exception {
+		Method m=clazz.getDeclaredMethod("searchCount",String.class);
+		return (int)m.invoke(dao,search);
+	}
+
+	public List<Notice> searchFindAll(int intPage, String search) throws Exception {
+		Method m=clazz.getDeclaredMethod("searchFindAll",int.class,String.class);
+		return (List<Notice>)m.invoke(dao,intPage,search);
+	}
 }
