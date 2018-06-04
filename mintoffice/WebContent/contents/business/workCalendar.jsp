@@ -1,21 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <style>
 #calendar {
-	width: 90%;
-	margin-bottom: 15px;
+width: 90%;
+margin-bottom: 15px;
 }
-
 .fc-sun { color:orange; }
 .fc-sat { color:lightblue; }
-
 .modal{
 top:280px;
 }
-
 .modal-footer:first-child{
 background-color: #6CDAB2;
 }
-
 </style>
 </head>
 <br>

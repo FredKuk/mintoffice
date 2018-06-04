@@ -42,11 +42,14 @@ public class NoticeDAOOracle implements Dao {
 			pstmt.setString(1, n.getEmp_no());
 			pstmt.setString(2, n.getNoti_title());
 			pstmt.setString(3, n.getNoti_contents());
+			System.out.println("here");
 			pstmt.executeUpdate();
 		}catch(SQLException e) {
 			if(e.getErrorCode()==1) { 
+				System.out.println("notice insert error");
 				throw new Exception("Error! insert Notice");
 			}else {
+				System.out.println("notice insert error");
 				throw e;
 			}
 		}finally {

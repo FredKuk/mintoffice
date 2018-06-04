@@ -452,8 +452,8 @@ $(function() {
 			'click',
 			'#arriveBtn',
 			function() {
-				if ($('#latiSpan').text() > 311
-						&& $('#longiSpan').text() > 1261) {
+				if (($('#latiSpan').text()>37.4)&&($('#latiSpan').text()<37.5)&&($('#longiSpan').text()<127)&&($('#longiSpan').text()>126.8)) {
+				//if ($('#latiSpan').text() > 311 && $('#longiSpan').text() > 1261) {
 					$('#arriveBtn').css('display', 'none');
 					$.ajax({
 						url : 'commute.do',

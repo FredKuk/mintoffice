@@ -37,18 +37,24 @@ $(function(){
 			success: function(data){
 				//$('section').html(data);				
 				data = data.trim();
-				if(data != '-1'){
+				if(data == '1'){
 					//$('section').html('로그인 성공');
 					//location.href="index.jsp";
 					<%--location.href="<%=request.getContextPath()%>";--%>
+					$('#loginWarining').css('display','none');
 					location.href="home.jsp";
-				}else if(data == '-1'){
-					window.alert('로그인 실패');
+				}else{
+					$('#loginWarining').css('display','initial');
 				}
 			}
 		});
 		return false; //기본이벤트처리 막기
 	});
+	
+	$('.warningx').on('click',function(){
+		$('#loginWarining').css('display','none');
+	});
+	
 });
 </script>	
 	
@@ -303,15 +309,16 @@ to {
 </body>
 
 <div id="id01" class="modal">
-
 	<form class="modal-content animate" action="/action_page.php">
 		<div class="imgcontainer">
 			<span onclick="document.getElementById('id01').style.display='none'"
-				class="close" title="Close Modal">&times;</span> <img
+				class="close warningx" title="Close Modal">&times;</span> <img
 				src="image/login/mintOffice.png" alt="Avatar" class="avatar">
 		</div>
-
 		<div class="container">
+			<div style="text-align:center;display:none;" id="loginWarining">
+				<label><b style="color:red;">LOGIN FAILED</b></label><br>
+			</div>
 			<label for="uname"><b>Username</b></label>
 			<input type="text" placeholder="Enter Username" name="id" required>
 			<label for="psw"><b>Password</b></label>
@@ -323,7 +330,7 @@ to {
 		<div class="container" style="background-color: #f1f1f1">
 			<button type="button"
 				onclick="document.getElementById('id01').style.display='none'"
-				class="cancelbtn">Cancel</button>
+				class="cancelbtn warningx">Cancel</button>
 			<span class="psw">Forgot <a href="#">password?</a></span>
 		</div>
 	</form>

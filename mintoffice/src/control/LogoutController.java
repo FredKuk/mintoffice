@@ -15,6 +15,9 @@ public class LogoutController implements Controller {
 		HttpSession session = request.getSession();
 		session.removeAttribute("loginInfo");
 		session.removeAttribute("emp_no");
+		if(session.getAttribute("is_manager")!=null) {
+			session.removeAttribute("is_manager");	
+		}
 		/*session.removeAttribute("dep_no");*/
 		session.invalidate();
 		//response.sendRedirect(request.getContextPath());

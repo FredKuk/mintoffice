@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <style>
 .mintboard_header{
 }
@@ -67,9 +68,11 @@
 <div class="mintBoard">
 	<div class="form-group mintboard_header" style="white-space: nowrap;">
 		<input type="text" class="form-control" placeholder="제목을 입력하세요" value="" id='nsearchText' style="width:30%;float:left;margin-right:7px;">
-		<input type="button" class="btn btn-outline-success" id="nsearchBtn" value="Search" style="float:left">	
-		<input type="button" class="btn btn-outline-secondary" value="삭제" id = "noticeD"style="margin-left:7px;float:right;">
-		<input type="button" class="btn btn-outline-info" value="등록" id = "noticeW" style="float:right;">
+		<input type="button" class="btn btn-outline-success" id="nsearchBtn" value="Search" style="float:left">
+	 	<c:if test="${not empty sessionScope.is_manager}">
+			<input type="button" class="btn btn-outline-secondary" value="삭제" id = "noticeD"style="margin-left:7px;float:right;">
+			<input type="button" class="btn btn-outline-info" value="등록" id = "noticeW" style="float:right;">
+	 	</c:if>	
 	</div>
 	<br>
 	<br>

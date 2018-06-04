@@ -39,7 +39,7 @@ public class EmployeeService implements Service {
 		Method m=clazz.getDeclaredMethod("insert", Employee.class);
 		m.invoke(dao, e);
 	}
-	public String login(String id, String pwd) throws Exception{
+	public Employee login(String id, String pwd) throws Exception{
 		System.out.println("***ACCESS***");
 		System.out.println("ID : "+id);
 		System.out.println("PWD : "+pwd);
@@ -54,10 +54,10 @@ public class EmployeeService implements Service {
 		if(e !=null) { //아이디가 있는 경우
 			if(e.getPwd().equals(pwd)) {//비밀번호일치
 				//return e.getEmp_no()+"@"+e.getDep_no();
-				return e.getEmp_no();
+				return e;
 			}
 		}
-		return "-1";
+		return null;
 	}
 	public String dupChk(String id) throws Exception{
 		Method m=clazz.getDeclaredMethod("selectById", String.class);

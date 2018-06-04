@@ -33,6 +33,9 @@
 				<c:if test="${item.late eq '1'}">
 					<td class="arriveBad"><i class="fas fa-times"></i></td>
 				</c:if>
+				<c:if test="${empty item.late}">
+					<td>ㆍ</td>
+				</c:if>
 				<td>${item.start}</td>
 				<td>${item.end}</td>
 				<td>${item.overwork}</td>
@@ -44,11 +47,17 @@
 				<c:if test="${item.sick eq '1'}">
 					<td class="dtYes"><i class="far fa-circle"></i></td>
 				</c:if>
+				<c:if test="${empty item.sick}">
+					<td></td>
+				</c:if>
 				<c:if test="${item.early eq '0'}">
 					<td class="dtNo"><i class="fas fa-times"></i></td>
 				</c:if>
 				<c:if test="${item.early eq '1'}">
 					<td class="dtYes"><i class="far fa-circle"></i></td>
+				</c:if>
+				<c:if test="${empty item.early}">
+					<td></td>
 				</c:if>
 			</tr>
 		</c:forEach>
