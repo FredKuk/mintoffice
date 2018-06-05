@@ -10,7 +10,7 @@
 			<div>
 				<p class="text-primary" style="border:solid;border-width:1px;border-color:#DCDCDC;margin-left:3%;margin-right:3%;padding:1%;">${item.nr_contents}</p>
 				<c:if test="${item.idValue eq sessionScope.loginInfo}">
-					<textarea class="form-control" id='nReplyModTextarea'rows="2" required style="width:94%;margin-left:3%;margin-right:13%;display:none">${item.nr_contents}</textarea>
+					<textarea class="form-control" rows="2" required style="width:94%;margin-left:3%;margin-right:13%;display:none">${item.nr_contents}</textarea>
 					<div class="replyBtnDiv"style='margin-left:3%;margin-bottom:1%;'>
 						<input type="text" value="${item.nr_no}" readonly style="display:none">
 						<button type="button" class="btn btn-info btn-sm" style="display:none">submit</button>

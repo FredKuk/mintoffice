@@ -118,10 +118,13 @@ $(function() {
 	$(document).on('click','.replyBtnDiv>button',function(){
 		if($(this).text()=='submit'){
 			var nr_no=$(this).siblings('input[type="text"]').val();
-			console.log('text : '+$('#nReplyModTextarea').text());
-			console.log('text : '+$('#nReplyModTextarea').val());
-			console.log('text : '+$('#nReplyModTextarea').html());
-			modNoticeReply(nr_no,$('#nReplyTextarea').val());
+		/*	console.log('text : '+$(this).parent().siblings('textarea').text());
+			console.log('text : '+$(this).parent().siblings('textarea').val());
+			console.log('text : '+$(this).parent().siblings('textarea').html());
+			console.log('text : '+$(this).parent().siblings('.form-control').text());
+			console.log('text : '+$(this).parent().siblings('.form-control').val());
+			console.log('text : '+$(this).parent().siblings('.form-control').html());*/
+			modNoticeReply(nr_no,$(this).parent().siblings('textarea').val());
 		}else if($(this).text()=='modify'){
 			$(this).parent('.replyBtnDiv').siblings('.text-primary').css('display','none');
 			$(this).parent('.replyBtnDiv').siblings('.form-control').css('display','initial');
@@ -241,7 +244,7 @@ function modNoticeReply(nrNo,nrContents){
 		method:'POST',
 		url:'nmodreply.do',
 		data:{
-			noti_no:notiNo,
+			nr_no:nrNo,
 			contents:nrContents
 			},
 		success : function(data){

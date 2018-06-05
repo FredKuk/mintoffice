@@ -29,7 +29,9 @@ public class NModReplyController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		String nr_no=request.getParameter("nr_no");
-		String contents=request.getParameter("nrContents");
+		String contents=request.getParameter("contents");
+		System.out.println("nr_no : "+nr_no);
+		System.out.println("nr_contents : "+contents);
 		try {
 			service.modReply(nr_no,contents);
 			request.setAttribute("result", "1");
