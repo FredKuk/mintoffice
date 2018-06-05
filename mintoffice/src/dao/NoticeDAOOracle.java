@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sql.MyConnection;
+import vo.NReply;
 import vo.Notice;
 
 public class NoticeDAOOracle implements Dao {
@@ -254,5 +255,94 @@ public class NoticeDAOOracle implements Dao {
 			MyConnection.close(rs, pstmt, con);
 		}
 	}	
-
+	public List<NReply> findAllReply(String noti_no) throws Exception {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String allReplySQL=
+				"SELECT n.nr_no,n.noti_no,e.id,n.nr_contents,to_char(n.nr_date, 'YYYY-MM-DD HH24:MI:SS') nr_date\r\n" + 
+				"FROM nreply n, employee e\r\n" + 
+				"WHERE n.emp_no=e.emp_no\r\n" + 
+				"AND n.noti_no=?\r\n" + 
+				"ORDER BY n.nr_date";		
+		List<NReply> list = new ArrayList<>();
+		try {
+			con = MyConnection.getConnection();
+			pstmt = con.prepareStatement(allReplySQL);
+			pstmt.setString(1, noti_no);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				list.add(new NReply(
+						rs.getString("nr_no"),
+						rs.getString("noti_no"),
+						rs.getString("id"),
+						rs.getString("nr_contents"),
+						rs.getString("nr_date")));				
+			}
+			return list;
+		}finally {
+			MyConnection.close(rs, pstmt, con);
+		}
+	}
+	public void newReply(String noti_no, String emp_no,String contents) throws Exception{
+		/*2)DB와 연결 */
+		Connection con = null;
+		/*3)SQL문장을 DB서버로 송신*/
+		PreparedStatement pstmt=null;
+		try {
+			con = MyConnection.getConnection();
+			String insertSQL = 
+					"INSERT INTO nreply\r\n" + 
+					"(nr_no,noti_no,emp_no,nr_contents,nr_date)\r\n" + 
+					"VALUES\r\n" + 
+					"(NR_SEQ.nextval,?,?,?,SYSDATE)";
+			pstmt = con.prepareStatement(insertSQL);
+			pstmt.setString(1, noti_no);
+			pstmt.setString(2, emp_no);
+			pstmt.setString(3, contents);
+			pstmt.executeUpdate();
+		}catch(SQLException e) {
+			if(e.getErrorCode()==1) { 
+				System.out.println("notice reply insert error");
+				throw new Exception("Error! reply insert Notice");
+			}else {
+				System.out.println("notice reply insert error");
+				throw e;
+			}
+		}finally {
+			MyConnection.close(pstmt, con);
+		}
+	}
+	public void delReply(String nr_no) throws Exception{
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String delSQL="DELETE FROM nreply\r\n" + 
+					  "WHERE nr_no = ?";
+		try {
+			con = MyConnection.getConnection();
+			pstmt = con.prepareStatement(delSQL);
+			pstmt.setString(1, nr_no);
+			pstmt.executeUpdate();
+		}finally {
+			MyConnection.close(pstmt, con);
+		}
+	}
+	
+	public void modReply(String nr_no, String contents) throws Exception{
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String modSQL="UPDATE nreply\r\n" + 
+				"SET\r\n" + 
+				"nr_contents = ?\r\n"+ 
+				"WHERE nr_no=?";
+		try {
+			con = MyConnection.getConnection();
+			pstmt = con.prepareStatement(modSQL);
+			pstmt.setString(1, contents);
+			pstmt.setString(2, nr_no);
+			pstmt.executeUpdate();
+		}finally {
+			MyConnection.close(pstmt, con);
+		}
+	}
 }

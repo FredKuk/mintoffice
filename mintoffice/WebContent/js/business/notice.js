@@ -14,23 +14,16 @@ $(function() {
 	
 	$(document).on('click','.mintboard>tbody a',function(){
 		var $clicks=$(this).parent('td').siblings('.boardclicks');
+		var $noti_no=$(this).find('span').text();
 		$clicks.text(parseInt($clicks.text())+1);
-		console.log("OK!");
-		$.ajax({
-			method : 'POST',
-			url : 'noticeDetail.do',
-			data:{noti_no:$(this).find('span').text()},
-			success : function(data) {
-				if (data.trim() != '-1') { //insert Notice success
-					$('#boardSection').empty();
-					$('#boardSection').html(data);
-				} else { //insert Notice failed
-					alert(data);
-				}
-			}
-		});
+		showNoticeDetail($noti_no);
+		return false;		
+	});
+	
+	/*새 댓글 추가*/
+	$(document).on("submit", "#newNReplyForm", function() {
+		newNoticeReply($('#nReplyTextarea').val());
 		return false;
-		
 	});
 	
 	/*새 공지사항 추가*/
@@ -120,6 +113,33 @@ $(function() {
 			showNoticeSearch(1,nsearch);
 		}
 	});
+	
+	/*댓글 버튼 클릭*/
+	$(document).on('click','.replyBtnDiv>button',function(){
+		if($(this).text()=='submit'){
+			var nr_no=$(this).siblings('input[type="text"]').val();
+			console.log('text : '+$('#nReplyModTextarea').text());
+			console.log('text : '+$('#nReplyModTextarea').val());
+			console.log('text : '+$('#nReplyModTextarea').html());
+			modNoticeReply(nr_no,$('#nReplyTextarea').val());
+		}else if($(this).text()=='modify'){
+			$(this).parent('.replyBtnDiv').siblings('.text-primary').css('display','none');
+			$(this).parent('.replyBtnDiv').siblings('.form-control').css('display','initial');
+			$(this).siblings('button:nth-of-type(1)').css('display','initial');
+			$(this).css('display','none');
+			$(this).siblings('button:nth-of-type(3)').css('display','none');
+			$(this).siblings('button:nth-of-type(4)').css('display','initial');
+		}else if($(this).text()=='delete'){
+			var nr_no=$(this).siblings('input[type="text"]').val();
+			delNoticeReply(nr_no)
+		}else if($(this).text()=='cancel'){
+			var notiNo=$('#noticeWModNo').val();
+			showNoticeDetail(notiNo);
+		}
+	});
+	
+	
+	
 });
 
 /*검색어 없을떄*/
@@ -163,3 +183,95 @@ function showNoticeSearch(pageNum,searchTxt){
 		});
 	}
 }
+
+function showNoticeDetail(notiNo){
+	$.ajax({
+		method : 'POST',
+		url : 'noticeDetail.do',
+		data:{noti_no:notiNo},
+		success : function(data) {
+			if (data.trim() != '-1') { //insert Notice success
+				$('#boardSection').empty();
+				$('#boardSection').html(data);
+				console.log("start to access reply");
+				showNoticeReply();
+			} else { //insert Notice failed
+				alert(data);
+			}
+		}
+	});
+}
+
+function showNoticeReply(){
+	var notiNo=$('#noticeWModNo').val();
+	$.ajax({
+		method:'POST',
+		url:'shownreply.do',
+		data:{noti_no:notiNo},
+		success : function(data){
+			$('#nReplyBody').empty();
+			$('#nReplyBody').html(data);
+		}
+	});	
+}
+
+function newNoticeReply(nrContents){
+	var notiNo=$('#noticeWModNo').val();
+	$.ajax({
+		method:'POST',
+		url:'nnewreply.do',
+		data:{
+			noti_no:notiNo,
+			contents:nrContents
+			},
+		success : function(data){
+			data=data.trim();
+			if(data=='-1'){
+				alert("Sorry. Try again please.");
+			}else{
+				showNoticeDetail(notiNo);
+			}
+		}
+	});		
+}
+
+function modNoticeReply(nrNo,nrContents){
+	var notiNo=$('#noticeWModNo').val();
+	$.ajax({
+		method:'POST',
+		url:'nmodreply.do',
+		data:{
+			noti_no:notiNo,
+			contents:nrContents
+			},
+		success : function(data){
+			data=data.trim();
+			if(data=='-1'){
+				alert("Sorry. Try again please.");
+			}else{
+				showNoticeDetail(notiNo);
+			}
+		}
+	});		
+}
+
+function delNoticeReply(nrNo){
+	var notiNo=$('#noticeWModNo').val();
+	$.ajax({
+		method:'POST',
+		url:'ndelreply.do',
+		data:{
+			nr_no:nrNo
+			},
+		success : function(data){
+			data=data.trim();
+			if(data=='-1'){
+				alert("Sorry. Try again please.");
+			}else{
+				showNoticeDetail(notiNo);
+			}
+		}
+	});		
+}
+
+

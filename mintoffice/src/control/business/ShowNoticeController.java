@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import control.Controller;
 import service.NoticeService;
@@ -33,7 +32,6 @@ public class ShowNoticeController implements Controller {
 	
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		HttpSession session = request.getSession();
 		String page=request.getParameter("page");
 		
 		int intPage=1;

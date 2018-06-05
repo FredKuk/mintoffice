@@ -5,6 +5,7 @@ import java.util.List;
 
 import dao.Dao;
 import dao.NoticeDAOOracle;
+import vo.NReply;
 import vo.Notice;
 
 public class NoticeService implements Service {
@@ -72,5 +73,25 @@ public class NoticeService implements Service {
 	public List<Notice> searchFindAll(int intPage, String search) throws Exception {
 		Method m=clazz.getDeclaredMethod("searchFindAll",int.class,String.class);
 		return (List<Notice>)m.invoke(dao,intPage,search);
+	}
+
+	public List<NReply> findAllReply(String noti_no) throws Exception {
+		Method m=clazz.getDeclaredMethod("findAllReply",String.class);
+		return (List<NReply>)m.invoke(dao,noti_no);
+	}
+
+	public void newReply(String noti_no, String emp_no,String contents) throws Exception {
+		Method m=clazz.getDeclaredMethod("newReply",String.class,String.class,String.class);
+		m.invoke(dao,noti_no,emp_no,contents);
+	}
+
+	public void delReply(String nr_no) throws Exception {
+		Method m=clazz.getDeclaredMethod("delReply",String.class);
+		m.invoke(dao,nr_no);
+	}
+
+	public void modReply(String nr_no, String contents) throws Exception {
+		Method m=clazz.getDeclaredMethod("modReply",String.class,String.class);
+		m.invoke(dao,nr_no,contents);
 	}
 }

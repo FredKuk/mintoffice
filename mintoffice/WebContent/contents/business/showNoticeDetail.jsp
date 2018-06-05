@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
-<form style="padding:3%;padding-top:1%;" id="noticemodForm">
+<form style="padding:3%;padding-top:1%;padding-bottom:2%;" id="noticemodForm">
 	<div class="form-group">
 		<label class="col-form-label">Title</label>
 		<input type="text" name="no" id="noticeWModNo" value="${requestScope.result.noti_no}" readonly style="display:none">
@@ -19,5 +19,14 @@
 		    <input type="button" class="btn btn-outline-danger" value="Delete"  id="noticeWDelBtn" style="line-height:14px;">
 	    </c:if>	
 	    <input type="button" class="btn btn-outline-secondary" value="Cancel" id="noticeWCanBtn"  style="line-height:14px;">
+	</div>
+</form>
+<div class="form-group" id="nReplyBody" style=" box-sizing: border-box;">
+</div>
+<form id ='newNReplyForm' style="padding:3%;padding-top:0px;">
+	<div class="form-group">
+		<label>New reply</label>
+		<textarea required class="form-control" id="nReplyTextarea" rows="3" placeholder="writing reply here"required></textarea>
+		<input type="submit" class="btn btn-outline-info" value="reply" id="" style="margin-top:10px;line-height:10px;">
 	</div>
 </form>
