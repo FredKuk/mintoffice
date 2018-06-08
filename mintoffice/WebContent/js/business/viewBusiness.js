@@ -17,27 +17,9 @@ $(function() {
 		case 'fileboard':
 			$.ajax({
 				method : 'POST',
-				url : 'contents/business/fileboard.jsp',
+				url : 'filelist.bo',
 				success : function(data) {
 					$('section').html(data);
-				}
-			});
-			break;
-		case 'imgboard':
-			$.ajax({
-				method : 'POST',
-				url : 'contents/business/imgboard.jsp',
-				success : function(data) {
-					$('section').html(data);
-				}
-			});
-			break;
-		case 'business':
-			$.ajax({
-				method : 'POST',
-				url : 'viewbusiness.do',
-				success : function(data) {
-					$('#contents').html(data);
 				}
 			});
 			break;

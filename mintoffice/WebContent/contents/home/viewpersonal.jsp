@@ -26,7 +26,7 @@ div#schedule_detail{
 display:none;
 }
 </style>
-<section>111
+<section>
 </section>
 <aside>
 <div class="list-group" id="personal_menu"><!-- active disabled -->
@@ -36,22 +36,6 @@ display:none;
   <a href="#" class="list-group-item list-group-item-action" id ="emp_info" style = "border: none">
   	<i class="fas fa-users"></i>&nbsp;직원정보
   </a>
-	<div id="all_msg">
-	  	<a href="#" class="list-group-item list-group-item-action" id ="message" style = "border: none">
-	  		<i class="far fa-comment-alt"></i>&nbsp;쪽지함
-	  	</a>
-	  	<div id="msg_detail">
-	  		<a href="#" class="list-group-item list-group-item-action" id ="rcv_msg" style = "border: none">
-	  			&emsp;-받은쪽지함
-	  		</a>
-	  		<a href="#" class="list-group-item list-group-item-action" id ="sent_msg" style = "border: none">
-	  			&emsp;-보낸쪽지함
-	  		</a>
-	  		<a href="#" class="list-group-item list-group-item-action" id ="msgbox_msg" style = "border: none">
-	  			&emsp;-쪽지함
-	  		</a>
-  		</div>
-  </div>
   <a href="#" class="list-group-item list-group-item-action" id ="memo" style = "border: none">
   	<i class="far fa-edit"></i>&nbsp;메모함
   </a>

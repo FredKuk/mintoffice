@@ -2,33 +2,24 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>findZip.html</title>
+<title>findZip</title>
 <style>
 div>ul>li {list-style: none;}
 div>ul>li>span{padding:5px;}
+
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 $(function(){ //$(document).ready(function(){});
   var $divObj = $('div');
   $divObj.on('click', 'ul>li', function(){
-	  /* var $arrObj = $(this).find('span');
-	  $arrObj.each(function(index, element){
-		  if($(element).attr("class") == 'zipcode'){
-			  
-		  }else{
-			  
-		  }
-	  }); */
 	  var zipcode = $(this).find('span.zipcode').html();
 	  var $otherArrObj = $(this).find('span').not('span.zipcode');
 	  var address1 = '';
 	  $otherArrObj.each(function(index, element){
 		  address1 += $(element).html();
 	  });	  
-	 //$('input[name=zipcode]').val(obj.code);
-	//	$('output.address1').html(obj.address1);
-	  $('input[name=zipcode]', opener.document).val(zipcode);
-	  $('output.address1', opener.document).html(address1);
+	  $('input[name=address1]', opener.document).val(address1);
 	  window.close(); //self.close();
   });
   var $btObj = $('button');  
@@ -38,10 +29,10 @@ $(function(){ //$(document).ready(function(){});
 		  alert('도로명주소를 입력하세요');
 		  $('input[type="search"]').focus();
 		  return false;
-	  }	  
+	  }
 	  $.ajax({
 		  method:'POST',
-		  url: 'findzip.do',
+		  url: 'findzip.bo',
 		  data: 'doro='+doro,
 		  success:function(data){				 
 			  var jsonArrObj = JSON.parse(data);

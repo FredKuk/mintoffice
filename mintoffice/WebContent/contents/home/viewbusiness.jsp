@@ -35,12 +35,6 @@ display:none;
   <a href="#" class="list-group-item list-group-item-action" id="fileboard" style = "border: none;">
   	<i class="far fa-save"></i>&nbsp;개인파일함
   </a>
-  <a href="#" class="list-group-item list-group-item-action" id="imgboard" style = "border: none;">
-  	<i class="far fa-image"></i>&nbsp;이미지보관함
-  </a>
-  <a href="#" class="list-group-item list-group-item-action" id="roomlist" style = "border: none;">
-  	<i class="fas fa-th"></i>&nbsp;회의실예약
-  </a>
   <a href="#" class="list-group-item list-group-item-action" id="workCalendar" style = "border: none;">
   	<i class="far fa-clock"></i>&nbsp;출/퇴근기록부
   </a>

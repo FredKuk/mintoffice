@@ -37,4 +37,54 @@
   <listener>
     <listener-class>listener.ContextLoaderListener</listener-class>
   </listener>
+  <servlet>
+    <description></description>
+    <display-name>EachController</display-name>
+    <servlet-name>EachController</servlet-name>
+    <servlet-class>control.personal.EachController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EachController</servlet-name>
+    <url-pattern>/EachController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EmpInfoServlet</display-name>
+    <servlet-name>EmpInfoServlet</servlet-name>
+    <servlet-class>control.personal.EmpInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmpInfoServlet</servlet-name>
+    <url-pattern>/empinfo.bo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FileListServlet</display-name>
+    <servlet-name>FileListServlet</servlet-name>
+    <servlet-class>control.business.FileListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FileListServlet</servlet-name>
+    <url-pattern>/filelist.bo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FindZipServlet</display-name>
+    <servlet-name>FindZipServlet</servlet-name>
+    <servlet-class>control.personal.FindZipServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FindZipServlet</servlet-name>
+    <url-pattern>/findzip.bo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FileWriteServlet</display-name>
+    <servlet-name>FileWriteServlet</servlet-name>
+    <servlet-class>control.business.FileWriteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FileWriteServlet</servlet-name>
+    <url-pattern>/filewrite.bo</url-pattern>
+  </servlet-mapping>  
 </web-app>
