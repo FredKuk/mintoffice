@@ -252,8 +252,11 @@ public class CommuteDAOOracle implements Dao {
 							"WHERE   emp_no=?";
 			pstmt = con.prepareStatement(showcSQL);
 			pstmt.setString(1, emp_no);
-			rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery(); 
 			while(rs.next()) {
+				if(rs.getString("com_end")==null) {
+					continue;
+				}
 				int isET=Integer.parseInt(rs.getString("com_isET"));
 				int endD=Integer.parseInt(rs.getString("com_endD"));
 				String com_early="";
@@ -274,7 +277,8 @@ public class CommuteDAOOracle implements Dao {
 						com_early
 				));
 			}
-		}finally {
+		}
+		finally {
 			MyConnection.close(rs, pstmt, con);
 		}
 		return list;
@@ -473,7 +477,13 @@ public class CommuteDAOOracle implements Dao {
 			pstmt.setInt(4, startRow);
 			pstmt.setInt(5, endRow);
 			rs = pstmt.executeQuery();		
+			ArrayList<String> duplicate= new ArrayList<>();
 			while(rs.next()) {
+				if(duplicate.contains(rs.getString("out_no"))) {
+					System.out.println("duplicate");
+					continue;
+				}
+				duplicate.add(rs.getString("out_no"));
 				olist.add(new OutWorkD(
 						rs.getString("out_no"),
 						rs.getString("emp_no"),
@@ -492,6 +502,8 @@ public class CommuteDAOOracle implements Dao {
 			CommuteD cd=null;
 			OutWorkD od=null;
 			CommuteDBean cdb=null;
+			System.out.println("list size : "+list.size());
+			System.out.println("olist size : "+olist.size());
 			while(true) {
 				cd=null;
 				od=null;
@@ -502,11 +514,22 @@ public class CommuteDAOOracle implements Dao {
 				if(od==null){
 					if(cd==null)
 						break;
+					if(find==true) {
+						System.out.println("commute duplicate : "+cd.getCom_start()+ " "+ cd.getCompare());
+						x++;
+						continue;
+					}	
 					cdb=new CommuteDBean(cd.getCompare(),cd.getCom_start(),cd.getCom_end(),cd.getCom_late(),cd.getCom_early(),cd.getCom_sick(),cd.getOverwork(),"-","-");
 					x++;
 					beanlist.add(cdb);
 				}else {
 					if(!cd.getCompare().equals(od.getCompare())){
+						if(find==true) {
+							System.out.println("commute duplicate : "+cd.getCom_start()+ " "+ cd.getCompare());
+							x++;
+							find=false;
+							continue;
+						}	
 						cdb=new CommuteDBean(cd.getCompare(),cd.getCom_start(),cd.getCom_end(),cd.getCom_late(),cd.getCom_early(),cd.getCom_sick(),cd.getOverwork(),"-","-");
 						find=false;
 						x++;

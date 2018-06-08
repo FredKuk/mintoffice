@@ -59,7 +59,7 @@ $(function() {
 					googlemap();
 					setMLocation();
 					workCalendar();
-					showWorkCalendar();
+					//showWorkCalendar();
 				}
 			});
 			break;
